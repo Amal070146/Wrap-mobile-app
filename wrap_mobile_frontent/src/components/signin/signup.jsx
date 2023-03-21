@@ -3,27 +3,42 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 const Signup = () => {
-  const [name, setname] = useState();
-  const [password, setpassword] = useState();
-  const [email, setemail] = useState();
-  const history = useNavigate();
-  const handle = () => {
-    axios.post("http://localhost:3001/signin", {
-      Name: name,
-      Email: email,
-      Pass: password,
-    });
-
-    history("/profile");
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password1, setPassword1] = useState("");
+  const [password2, setPassword2] = useState("");
+  const [error, setError] = useState(null);
+  const navigate = useNavigate();
+  const handleSignup = async (e) => {
+    e.preventDefault();
+    if (password1 !== password2) {
+      setError("Passwords do not match");
+      return;
+    }
+    try {
+      const response = await axios.post("http://localhost:8000/api/signup/", {
+        username,
+        email,
+        password1,
+        password2,
+      });
+      if (response.status === 201) {
+        // redirect to home page after successful signup
+        navigate("/profile", { replace: true });
+      }
+    } catch (error) {
+      setError(error.response.data.error);
+    }
   };
 
   return (
     <div className="signin-wrapper">
       <div className="signin-wrapper-image">
-        <h2>Welcome to Tetra</h2>
+        <h2>Welcome to Wrap</h2>
       </div>
       <div className="form-signin-wrapper">
-        <form action="/loginresponse">
+        {error && <p className="text-danger">{error}</p>}
+        <form onSubmit={handleSignup}>
           <div className="form-signin">
             <label htmlFor="">Name :</label>
             <input
@@ -31,17 +46,17 @@ const Signup = () => {
               id="fname"
               name="name"
               placeholder="Your name.."
-              onChange={(e) => setname(e.target.value)}
+              onChange={(e) => setUsername(e.target.value)}
             />
           </div>
           <div className="form-signin">
-            <label htmlFor="">Email :</label>
+            <label>Email :</label>
             <input
               type="text"
               id="fname"
-              name="name"
+              name="email"
               placeholder="Your Email.."
-              onChange={(e) => setemail(e.target.value)}
+              onChange={(e) => setEmail(e.target.value)}
             />
           </div>
           <div className="form-signin">
@@ -69,7 +84,7 @@ const Signup = () => {
               id="fname"
               name="name"
               placeholder="Enter Password"
-              onChange={(e) => setpassword(e.target.value)}
+              onChange={(e) => setPassword1(e.target.value)}
             />
           </div>
           <div className="form-signin">
@@ -79,17 +94,19 @@ const Signup = () => {
               id="fname"
               name="name"
               placeholder="Confirm password..."
+              onChange={(e) => setPassword2(e.target.value)}
             />
           </div>
           <div className="submitbutton">
-            <button
+            {/* <button
               // onClick={(e) => {
               //   navigate("/profile");
               // }}
-              onClick={handle}
+              onClick={handleSignup}
             >
               Submit
-            </button>
+            </button> */}
+            <a href="" onClick={(e) => navigate("/dashboard")}>Submit</a>
           </div>
         </form>
       </div>

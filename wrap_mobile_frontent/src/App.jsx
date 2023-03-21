@@ -1,8 +1,8 @@
 import React from "react";
-import { BrowserRouter ,Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import LoginForm from "./components/LoginForm";
 import SignupForm from "./components/SignupForm";
-import Home from "./components/Home";
+import Home from "./components/Dashboard";
 
 const App = () => {
   return (

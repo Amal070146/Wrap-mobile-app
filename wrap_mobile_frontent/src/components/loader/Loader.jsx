@@ -15,7 +15,7 @@ const Loader = () => {
   return (
     <div className="loader">
       <h1>Loading...</h1>
-      {redirect && <Navigate to="/login" />}
+      {redirect && <Navigate to="/home" />}
     </div>
   );
 };

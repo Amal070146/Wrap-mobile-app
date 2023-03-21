@@ -17,7 +17,7 @@ const Home = () => {
           <BiDownArrow
             className="scroll_down"
             onClick={(e) => {
-              navigate("/login");
+              navigate("/signup");
             }}
           />
         </div>

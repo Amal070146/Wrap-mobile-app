@@ -5,17 +5,26 @@ import axios from "axios"
 
 const Login = () => {
   const navigate = useNavigate();
-  const [password, setpassword] = useState();
-  const [email, setemail] = useState();
-  const history = useNavigate();
-  const handle = () => {
-    axios.post("http://localhost:3001/login", {
-      Email: email,
-      Pass: password,
-    }).then((response)=>{
-      console.log(response)
-    })
-
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState(null);
+  const [email, setEmail] = useState();
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post("http://localhost:8000/api/login/", {
+        username,
+        email,
+        password,
+      });
+      console.log(response);
+      // if (response.status === 200) {
+      //   // redirect to home page after successful login
+      //   navigate("/");
+      // }
+    } catch (error) {
+      setError(error.response.data.error);
+    }
   };
   return (
     <div className="signin-wrapper">
@@ -23,31 +32,40 @@ const Login = () => {
         <h2>Welcome Back </h2>
       </div>
       <div className="form-signin-wrapper">
-        <form action="">
+        {error && <p className="text-danger">{error}</p>}
+        <form onSubmit={handleLogin}>
+          <div className="form-group">
+            <label>Username:</label>
+            <input
+              type="text"
+              name="username"
+              className="form-control"
+              onChange={(e) => setUsername(e.target.value)}
+            />
+          </div>
           <div className="form-signin">
-            <label htmlFor="">Email :</label>
+            <label>Email :</label>
             <input
               type="text"
               id="fname"
-              name="name"
+              name="email"
               placeholder="Your Email.."
-              onChange={(e) => setemail(e.target.value)}
+              onChange={(e) => setEmail(e.target.value)}
             />
           </div>
 
-          <div className="form-signin">
-            <label htmlFor="">Password :</label>
+          <div className="form-group">
+            <label>Password:</label>
             <input
               type="password"
-              id="fname"
-              name="name"
-              placeholder="Enter Password"
-              onChange={(e) => setpassword(e.target.value)}
+              className="form-control"
+              onChange={(e) => setPassword(e.target.value)}
             />
           </div>
 
           <div className="submitbutton">
-            <button onClick={handle}>Submit</button>
+            {/* <button onClick={handleLogin}>Submit</button> */}
+            <a href="" onClick={(e) => navigate("/dashboard")}>Submit</a>
           </div>
         </form>
       </div>

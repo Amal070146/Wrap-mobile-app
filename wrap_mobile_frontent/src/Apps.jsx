@@ -4,20 +4,20 @@ import {
   RouterProvider,
   useNavigate,
 } from "react-router-dom";
+import Dashboard from "./components/Dashboard";
 import Home from "./components/home/Home";
 import Signup from "./components/signin/signup";
 import Login from "./components/signin/login";
-import Profile from "./components/profile/profile";
+import Profile from "./components/Profile";
 import Loader from "./components/loader/Loader";
 const Apps = () => {
-
-    const [loading, setLoading] = useState(false);
-    useEffect(() => {
-      setLoading(true);
-      setTimeout(() => {
-        setLoading(false);
-      }, 2000);
-    }, []);
+  const [loading, setLoading] = useState(false);
+  useEffect(() => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+  }, []);
   const router = createBrowserRouter([
     {
       path: "/",
@@ -26,6 +26,10 @@ const Apps = () => {
     {
       path: "/home",
       element: <Home />,
+    },
+    {
+      path: "/dashboard",
+      element: <Dashboard />,
     },
     {
       path: "/signup",
