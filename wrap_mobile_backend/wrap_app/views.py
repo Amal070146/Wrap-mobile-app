@@ -1,5 +1,4 @@
 
-from rest_framework import viewsets
 from .models import MyModel
 from .serializers import MyModelSerializer
 
@@ -14,9 +13,7 @@ from django.utils.decorators import method_decorator
 
 from .serializers import UserSerializer
 
-class MyModelViewSet(viewsets.ModelViewSet):
-    queryset = MyModel.objects.all()
-    serializer_class = MyModelSerializer
+from rest_framework import viewsets, permissions 
 
 User = get_user_model()
 
@@ -51,3 +48,10 @@ class UserSignupView(generics.CreateAPIView):
     permission_classes = (AllowAny,)
     serializer_class = UserSerializer
     queryset = User.objects.all()
+
+
+class WrapViewSet(viewsets.ModelViewSet):
+    serializer_class=UserSerializer
+    permission_classes = [permissions.IsAuthenticated] 
+    def get_queryset(self):  # added
+        return self.request.user.wrap_app.all()

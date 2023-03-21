@@ -16,10 +16,11 @@ function Login() {
         username,
         password,
       });
-      if (response.status === 200) {
-        // redirect to home page after successful login
-        navigate("/", { replace: true });
-      }
+      console.log(response)
+      // if (response.status === 200) {
+      //   // redirect to home page after successful login
+      //   navigate("/");
+      // }
     } catch (error) {
       setError(error.response.data.error);
     }
