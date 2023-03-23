@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="../static/css/regs.css" rel="stylesheet" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="login">
+      <div class="signup-header">
+        <h3>Lets get started!</h3>
+        <p>Welcome back to WRAP,<br />login to continue.</p>
+      </div>
+      <div><img src="../static/images/logsig.png" alt="" /></div>
+      <form action="{% url 'signin' %}" method="POST">
+        {% csrf_token %}
+        <input
+          type="text"
+          name="name"
+          placeholder="User name"
+          autocomplete="off"
+          required
+        />
+        <input
+          type="password"
+          name="password"
+          placeholder="Password"
+          autocomplete="off"
+          required
+        />
+        <input
+          style="
+            height: 35px;
+            border-radius: 16px;
+            background-color: #009743;
+            color: white;
+          "
+          type="submit"
+          value="Login"
+          name="login"
+        />
+      </form>
+    </div>
+    <div>
+      <p style="font-size: 14px">
+        Not a member? <a href="{% url 'signup' %}">Register Now</a>
+      </p>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="../static/css/regs.css" rel="stylesheet" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="signup">
+      <div class="signup-header">
+        <h3>Lets get started!</h3>
+        <p>Welcome to WRAP, <br />signup to continue.</p>
+      </div>
+      <div><img src="../static/images/logsig.png" alt="" /></div>
+      <form action="{% url 'signup' %}" method="POST">
+        {% csrf_token %}
+        <span style="font-size: 18px">{{ status }}</span>
+        <input
+          type="text"
+          name="uname"
+          placeholder="User name"
+          autocomplete="off"
+          required
+        />
+        <input
+          type="email"
+          name="email"
+          placeholder="Email"
+          autocomplete="off"
+          required
+        />
+        <input
+          type="password"
+          name="password"
+          minlength="3"
+          autocomplete="off"
+          placeholder="Password"
+          required
+        />
+        <input
+          type="password"
+          name="repassword"
+          minlength="3"
+          autocomplete="off"
+          placeholder="Confirm Password"
+          required
+        />
+        <input
+          style="
+            height: 35px;
+            border-radius: 16px;
+            background-color: #009743;
+            color: white;
+          "
+          type="submit"
+          value="Sign Up"
+          name="submit"
+        />
+      </form>
+      <div>
+        <p style="font-size: 14px">
+          Already Registered? <a href="{% url 'signin' %}">Continue to Login</a>
+        </p>
+      </div>
+    </div>
+  </body>
+</html>

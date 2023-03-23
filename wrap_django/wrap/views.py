@@ -63,11 +63,11 @@ def signup(request):
             return user_home(request)
         else:
             data = {'status':"Password and Re-entered password must be same"}
-            return render(request,'login.html',context=data)
+            return render(request,'signup.html',context=data)
     else:
-        return render(request, 'login.html')
+        return render(request, 'signup.html')
     
-def login(request):
+def signin(request):
     if request.method == 'POST':
         name = request.POST.get('name')
         password = request.POST.get('password')
@@ -79,9 +79,9 @@ def login(request):
             return redirect("user_home")
         else:
             data = {'status':"Incorrect Password!!!"}
-            return render(request,'login.html',context=data)
+            return render(request,'signin.html',context=data)
     else:
-        return render(request, 'login.html')
+        return render(request, 'signin.html')
 
 
 
@@ -89,7 +89,7 @@ def user_logout(request):
     if 'uname' in request.session:
         del request.session['uname']
 
-    return render(request,'login.html')
+    return render(request,'signin.html')
 
 #User Home Page
 def user_home(request):
