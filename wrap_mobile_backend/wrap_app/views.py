@@ -55,3 +55,5 @@ class WrapViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticated] 
     def get_queryset(self):  # added
         return self.request.user.wrap_app.all()
+    def perform_create(self, serializer):  # added
+        serializer.save(name=self.request.user)
