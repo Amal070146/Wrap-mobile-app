@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="../static/css/login.css" rel="stylesheet" />
+    <title>Login</title>
+  </head>
+  <body>
+    <div class="main">
+      <input type="checkbox" id="chk" aria-hidden="true" />
+
+      <div class="signup">
+        <form action="{% url 'signup' %}" method="POST">
+          {% csrf_token %}
+          <label for="chk" aria-hidden="true">Sign up</label>
+          <span style="font-size: 18px">{{ status }}</span>
+          <input
+            type="text"
+            name="uname"
+            placeholder="User name"
+            autocomplete="off"
+            required
+          />
+          <input
+            type="email"
+            name="email"
+            placeholder="Email"
+            autocomplete="off"
+            required
+          />
+          <input
+            type="password"
+            name="password"
+            minlength="3"
+            autocomplete="off"
+            placeholder="Password"
+            required
+          />
+          <input
+            type="password"
+            name="repassword"
+            minlength="3"
+            autocomplete="off"
+            placeholder="Confirm Password"
+            required
+          />
+          <input style="height: 30px; border-radius: 16px;" type="submit" value="Submit" name="submit" />
+        </form>
+      </div>
+
+      <div class="login">
+        <form action="{% url 'login' %}" method="POST">
+          {% csrf_token %}
+          <label for="chk" aria-hidden="true">Login</label>
+          <input
+            type="text"
+            name="name"
+            placeholder="User name"
+            autocomplete="off"
+            required
+          />
+          <input type="password" name="password" placeholder="Password" autocomplete="off" required />
+          <input style="height: 30px; border-radius: 16px;" type="submit" value="Login" name="login" />
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
