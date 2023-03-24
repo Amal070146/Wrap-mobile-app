@@ -60,7 +60,7 @@ def signup(request):
             user.save()
             email = [email]
             request.session['uname'] = name
-            return user_home(request)
+            return dashboard(request)
         else:
             data = {'status':"Password and Re-entered password must be same"}
             return render(request,'signup.html',context=data)
@@ -76,7 +76,7 @@ def signin(request):
 
         if user.password == password:
             request.session['uname'] = name
-            return redirect("user_home")
+            return redirect("dashboard")
         else:
             data = {'status':"Incorrect Password!!!"}
             return render(request,'signin.html',context=data)
@@ -92,10 +92,34 @@ def user_logout(request):
     return render(request,'signin.html')
 
 #User Home Page
-def user_home(request):
+def dashboard(request):
     if 'uname' in request.session:
         data = {'name':request.session.get('uname')}
         return render(request,'dashboard.html',context=data)
+    else:
+        data = {'status':'You need to login first'}
+        return render(request,'login.html',context=data)
+    
+def booking(request):
+    if 'uname' in request.session:
+        data = {'name':request.session.get('uname')}
+        return render(request,'booking.html',context=data)
+    else:
+        data = {'status':'You need to login first'}
+        return render(request,'login.html',context=data)
+    
+def rewards(request):
+    if 'uname' in request.session:
+        data = {'name':request.session.get('uname')}
+        return render(request,'rewards.html',context=data)
+    else:
+        data = {'status':'You need to login first'}
+        return render(request,'login.html',context=data)
+    
+def track(request):
+    if 'uname' in request.session:
+        data = {'name':request.session.get('uname')}
+        return render(request,'track.html',context=data)
     else:
         data = {'status':'You need to login first'}
         return render(request,'login.html',context=data)

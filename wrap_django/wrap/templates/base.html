@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    {% block style %} {% endblock %}
+    <link rel="stylesheet" href="../static/css/base.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="header-nav-bar">
+      <div>
+        <h1>{% block title %} {% endblock %}</h1>
+      </div>
+      <div>
+        <img src="../static/images/notification.svg" alt="" />
+        <img src="../static/images/profile icon.svg" alt="" />
+      </div>
+    </div>
+    <div class="body-content">{% block content %} {% endblock %}</div>
+    <div class="navigation-bar">
+      <a href="{% url 'dashboard' %}"><img src="../static/images/dashboard.svg" alt=""></a>
+      <a href="{% url 'booking' %}"><img src="../static/images/booking.svg" alt=""></a>
+
+      <a href="{% url 'rewards' %}"><img src="../static/images/rewards.svg" alt=""></a>
+      <a href="{% url 'track' %}"><img src="../static/images/track.svg" alt=""></a>
+    </div>
+  </body>
+</html>

@@ -11,7 +11,8 @@
     <div class="login">
       <div class="signup-header">
         <h3>Lets get started!</h3>
-        <p>Welcome back to WRAP,</p><p>to continue.</p> 
+        <p style="margin-bottom: -20px">Welcome back to WRAP,</p>
+        <p>to continue.</p>
       </div>
       <div><img src="../static/images/logsig.png" alt="" /></div>
       <form action="{% url 'signin' %}" method="POST">
@@ -32,8 +33,9 @@
         />
         <input
           style="
-            height: 35px;
-            border-radius: 16px;
+            height: 40px;
+            width: 278px;
+            border-radius: 10px;
             background-color: #009743;
             color: white;
           "
@@ -44,7 +46,7 @@
       </form>
     </div>
     <div>
-      <p style="font-size: 14px">
+      <p style="font-size: 12px">
         Not a member? <a href="{% url 'signup' %}">Register Now</a>
       </p>
     </div>
