@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     {% block style %} {% endblock %}
-    <link rel="stylesheet" href="../static/css/base.css" />
+    <link rel="stylesheet" href="../static/css/bases.css" />
     <title>Document</title>
   </head>
   <body>
@@ -14,8 +14,8 @@
         <h1>{% block title %} {% endblock %}</h1>
       </div>
       <div>
-        <img src="../static/images/notification.svg" alt="" />
-        <img src="../static/images/profile icon.svg" alt="" />
+        <a href=""><img src="../static/images/notification.svg" alt="" /></a>
+        <a href=""><img src="../static/images/profile icon.svg" alt="" /></a>
       </div>
     </div>
     <div class="body-content">{% block content %} {% endblock %}</div>

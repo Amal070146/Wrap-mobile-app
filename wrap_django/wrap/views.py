@@ -98,7 +98,7 @@ def dashboard(request):
         return render(request,'dashboard.html',context=data)
     else:
         data = {'status':'You need to login first'}
-        return render(request,'login.html',context=data)
+        return render(request,'sigin.html',context=data)
     
 def booking(request):
     if 'uname' in request.session:
@@ -106,7 +106,7 @@ def booking(request):
         return render(request,'booking.html',context=data)
     else:
         data = {'status':'You need to login first'}
-        return render(request,'login.html',context=data)
+        return render(request,'signin.html',context=data)
     
 def rewards(request):
     if 'uname' in request.session:
@@ -114,7 +114,7 @@ def rewards(request):
         return render(request,'rewards.html',context=data)
     else:
         data = {'status':'You need to login first'}
-        return render(request,'login.html',context=data)
+        return render(request,'signin.html',context=data)
     
 def track(request):
     if 'uname' in request.session:
@@ -122,5 +122,37 @@ def track(request):
         return render(request,'track.html',context=data)
     else:
         data = {'status':'You need to login first'}
-        return render(request,'login.html',context=data)
+        return render(request,'signin.html',context=data)
     
+#dashboard pages
+def dropoff(request):
+    if 'uname' in request.session:
+        data = {'name':request.session.get('uname')}
+        return render(request,'dashboard/dropoff.html',context=data)
+    else:
+        data = {'status':'You need to login first'}
+        return render(request,'signin.html',context=data)
+    
+def pickup(request):
+    if 'uname' in request.session:
+        data = {'name':request.session.get('uname')}
+        return render(request,'dashboard/pickup.html',context=data)
+    else:
+        data = {'status':'You need to login first'}
+        return render(request,'signin.html',context=data)
+    
+def purchase(request):
+    if 'uname' in request.session:
+        data = {'name':request.session.get('uname')}
+        return render(request,'dashboard/purchase.html',context=data)
+    else:
+        data = {'status':'You need to login first'}
+        return render(request,'signin.html',context=data)
+    
+def report(request):
+    if 'uname' in request.session:
+        data = {'name':request.session.get('uname')}
+        return render(request,'dashboard/report.html',context=data)
+    else:
+        data = {'status':'You need to login first'}
+        return render(request,'signin.html',context=data)

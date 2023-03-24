@@ -1,0 +1,122 @@
+a {
+  text-decoration: none;
+}
+
+a > div > h2 {
+  color: #009743;
+}
+
+a > div > p {
+  color: black;
+}
+
+.dashboard-wrapper{
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  align-items: center;
+}
+
+.schedule-pickup {
+  background-color: #009743;
+  width: 100%;
+  padding: 10px;
+  padding-bottom: 10px;
+  border-radius: 20px;
+  height: 240px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.schedule-pickup-box {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 20px 0px 20px;
+}
+
+.schedule-pickup-box-text > h2 {
+  font-size: 22px;
+  color: white;
+  font-weight: 600;
+}
+
+.schedule-pickup-box-text > p{
+  font-size: 14px;
+}
+
+.schedule-pickup-link > a {
+  background-color: white;
+  display: flex;
+  border-radius: 20px;
+  padding: 10px;
+  flex-direction: row;
+  height: 75px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.schedule-pickup-link-text > h2 {
+  font-size: 22px;
+  font-weight: 500;
+}
+
+.schedule-pickup-link-text > p {
+  font-size: 12px;
+}
+
+.drop-report-wrapper {
+  display: flex;
+  max-width: 500px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dropoff {
+  background-color: rgba(1, 152, 68, 0.3);
+  border-radius: 13px;
+  padding: 15px;
+  display: flex;
+  width: 133px;
+  height: 100px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+}
+
+.dropoff > img {
+  width: 40px;
+}
+
+.wrap-bin {
+  /* display: grid;
+  grid-template-columns: repeat(1fr,3); */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.wrap-bin > p {
+  color: #009743;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.wrap-bin-button-wrapper {
+  display: grid;
+  grid-template-columns: auto auto auto;
+}
+
+.wrap-bin-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 130px;
+  width: 110px;
+  background: white;
+  box-shadow: -2px 4px 16px rgba(0, 0, 0, 0.25);
+  border-radius: 15px;
+  gap: 8px;
+}
