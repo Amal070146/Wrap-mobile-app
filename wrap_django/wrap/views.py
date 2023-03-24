@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect
 from django.http import HttpResponse, HttpResponseRedirect
 import datetime
 from .models import User, Admin
+from .forms import ProfileForm
 
 #loader and home\
 def loader(request):
@@ -52,14 +53,16 @@ def signup(request):
     if request.method == 'POST':
         name = request.POST.get('uname')
         email = request.POST.get('email')
+        photo = request.FILES.get('photo')
         password = request.POST.get('password')
         re_password = request.POST.get('repassword')
 
         if(password == re_password):
-            user = User(name=name,email=email,password=password)
+            user = User(name=name,email=email,photo=photo,password=password)
             user.save()
             email = [email]
             request.session['uname'] = name
+            request.session['email'] = email
             return dashboard(request)
         else:
             data = {'status':"Password and Re-entered password must be same"}
@@ -70,12 +73,14 @@ def signup(request):
 def signin(request):
     if request.method == 'POST':
         name = request.POST.get('name')
+        email = request.POST.get('email')
         password = request.POST.get('password')
 
-        user = User.objects.get(name=name)
+        user = User.objects.get(name=name,email=email)
 
         if user.password == password:
             request.session['uname'] = name
+            request.session['email'] = email
             return redirect("dashboard")
         else:
             data = {'status':"Incorrect Password!!!"}
@@ -156,3 +161,29 @@ def report(request):
     else:
         data = {'status':'You need to login first'}
         return render(request,'signin.html',context=data)
+    
+def profile(request):
+    if request.method == 'POST':
+        name = request.POST.get('uname')
+        email = request.POST.get('email')
+        photo = request.FILES.get('photo')
+        user= User(name=name,email=email,photo=photo)
+        data = {'name':request.session.get('uname')}
+        if photo:
+            user.photo = photo
+        user = User(name=name,email=email,photo=photo)
+        user.save()
+        return redirect('profile')
+    else:
+         if 'uname' in request.session:
+            name = request.session.get('uname')
+            email = request.session.get('email')
+            # password = {'name':request.session.get('password')}
+            my_dict = {
+                'name': name,
+                'email':email
+            }
+            return render(request,'profile.html',my_dict)
+         else:
+            data = {'status':'You need to login first'}
+            return render(request,'signin.html',context=data)

@@ -2,7 +2,7 @@ a {
   text-decoration: none;
 }
 
-a > div > h2 {
+a > div > h3 {
   color: #009743;
 }
 
@@ -10,7 +10,7 @@ a > div > p {
   color: black;
 }
 
-.dashboard-wrapper{
+.dashboard-wrapper {
   display: flex;
   flex-direction: column;
   gap: 30px;
@@ -23,10 +23,22 @@ a > div > p {
   padding: 10px;
   padding-bottom: 10px;
   border-radius: 20px;
-  height: 240px;
+  height: 250px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+}
+
+@media all and (max-width: 380px) {
+  .schedule-pickup {
+    height: 250px;
+  }
+  .schedule-pickup > div > div > h2 {
+    font-size: 18px;
+  }
+  .schedule-pickup > div > div > h3 {
+    font-size: 18px;
+  }
 }
 
 .schedule-pickup-box {
@@ -36,13 +48,13 @@ a > div > p {
 }
 
 .schedule-pickup-box-text > h2 {
-  font-size: 22px;
+  font-size: 20px;
   color: white;
   font-weight: 600;
 }
 
-.schedule-pickup-box-text > p{
-  font-size: 14px;
+.schedule-pickup-box-text > p {
+  font-size: 12px;
 }
 
 .schedule-pickup-link > a {
@@ -51,18 +63,18 @@ a > div > p {
   border-radius: 20px;
   padding: 10px;
   flex-direction: row;
-  height: 75px;
+  height: 70px;
   align-items: center;
   justify-content: space-between;
 }
 
-.schedule-pickup-link-text > h2 {
-  font-size: 22px;
+.schedule-pickup-link-text > h3 {
+  font-size: 20px;
   font-weight: 500;
 }
 
 .schedule-pickup-link-text > p {
-  font-size: 12px;
+  font-size: 11px;
 }
 
 .drop-report-wrapper {
@@ -95,6 +107,7 @@ a > div > p {
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 10px;
 }
 
 .wrap-bin > p {

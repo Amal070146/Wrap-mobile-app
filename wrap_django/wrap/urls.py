@@ -1,6 +1,7 @@
 from .views import signup,admin_home,get_start,loader,login_admin,signin,user_logout,admin_logout
 from .views import track,booking,rewards,dashboard
 from .views import report,pickup,purchase,dropoff
+from .views import profile
 from django import contrib
 from django.urls import include,path
 
@@ -22,6 +23,8 @@ urlpatterns = [
     path('dropoff/',dropoff,name='dropoff'),
     path('pickup/',pickup,name='pickup'),
     path('purchase/',purchase,name='purchase'),
-    path('report/',report,name='report')
+    path('report/',report,name='report'),
+
+    path('profile/',profile,name='profile'),
 
 ]
