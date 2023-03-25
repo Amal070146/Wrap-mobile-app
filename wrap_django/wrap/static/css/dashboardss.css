@@ -13,17 +13,17 @@ a > div > p {
 .dashboard-wrapper {
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  gap: 20px;
   align-items: center;
 }
 
 .schedule-pickup {
   background-color: #009743;
-  width: 100%;
+  width: 90%;
   padding: 10px;
   padding-bottom: 10px;
   border-radius: 20px;
-  height: 250px;
+  height: fit-content;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -79,9 +79,9 @@ a > div > p {
 
 .drop-report-wrapper {
   display: flex;
-  max-width: 500px;
   justify-content: space-between;
   align-items: center;
+  gap: 10px;
 }
 
 .dropoff {
@@ -89,12 +89,13 @@ a > div > p {
   border-radius: 13px;
   padding: 15px;
   display: flex;
-  width: 133px;
+  width: 130px;
   height: 100px;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 3px;
+  margin: 0;
 }
 
 .dropoff > img {
@@ -117,8 +118,8 @@ a > div > p {
 }
 
 .wrap-bin-button-wrapper {
-  display: grid;
-  grid-template-columns: auto auto auto;
+display: flex;
+gap: 10px;
 }
 
 .wrap-bin-button {

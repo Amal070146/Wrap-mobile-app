@@ -9,20 +9,21 @@
       * {
         margin: 0;
       }
-      body{
+      body {
         display: flex;
         flex-direction: column;
         gap: 72px;
         justify-content: space-between;
+        height: 100vh;
       }
-      .image{
+      .image {
         display: flex;
         flex-direction: column;
         place-items: center;
         font-size: 22px;
         font-weight: 500;
       }
-      .get-start-bottom{
+      .get-start-bottom {
         background: #87c9a5;
         width: 100vw;
         height: 500px;
@@ -30,9 +31,9 @@
         align-items: center;
         justify-content: center;
         border-top-left-radius: 30%;
-         border-top-right-radius: 30%;
+        border-top-right-radius: 30%;
       }
-      a{
+      a {
         padding: 10px;
         width: 150px;
         height: 20px;
@@ -58,10 +59,14 @@
       "
     ></div>
     <div class="image">
-        <img src="../static/images/logo-green.svg" alt="">
-        <p>Creating a cleaner</p><p>tomorrow.</p> 
+      <img src="../static/images/logo-green.svg" alt="" />
+      <p>Creating a cleaner</p>
+      <p>tomorrow.</p>
     </div>
-    <div class="get-start-bottom">
-    <a href="{% url 'signup' %}">Get start!</a></div>
+    <div style="bottom: 0;">
+      <div class="get-start-bottom">
+        <a href="{% url 'signup' %}">Get start!</a>
+      </div>
+    </div>
   </body>
 </html>

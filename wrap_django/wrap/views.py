@@ -108,7 +108,9 @@ def dashboard(request):
 def booking(request):
     if 'uname' in request.session:
         data = {'name':request.session.get('uname')}
+        # bookings = Booking.objects.all()
         return render(request,'booking.html',context=data)
+        # return render(request,'booking.html',{'bookings': bookings},context=data)
     else:
         data = {'status':'You need to login first'}
         return render(request,'signin.html',context=data)
@@ -164,14 +166,15 @@ def report(request):
     
 def profile(request):
     if request.method == 'POST':
-        name = request.POST.get('uname')
-        email = request.POST.get('email')
-        photo = request.FILES.get('photo')
-        user= User(name=name,email=email,photo=photo)
+        user= User()
+        user.name = request.POST.get('uname')
+        user.email = request.POST.get('email')
+        user.photo = request.FILES.get('photo')
+        
         data = {'name':request.session.get('uname')}
-        if photo:
-            user.photo = photo
-        user = User(name=name,email=email,photo=photo)
+        if user.photo:
+            user.photo = request.FILES.get('photo')
+        user = User(name=name,email=email,photo=user.photo)
         user.save()
         return redirect('profile')
     else:

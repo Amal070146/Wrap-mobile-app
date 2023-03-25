@@ -1,6 +1,6 @@
 {% extends 'base.html' %} 
 {% block style %} 
-<link rel="stylesheet" href="../static/css/dashboardsd.css">
+<link rel="stylesheet" href="../static/css/dashboardss.css">
 {% endblock %}
 {% block title %} Dashboard{% endblock %}
 {% block content %}
@@ -29,12 +29,12 @@
     <a href="{% url 'dropoff' %}">
     <div class="dropoff">
       <img src="../static/images/location-logo.svg" alt="">
-      <p style="font-size: 15px;">Drop off at a collection point</p>
+      <p style="font-size: 13px;">Drop off at a</p> <p style="font-size: 13px;"> collection point</p>
     </div></a>
     <a href="{% url 'report' %}">
     <div class="dropoff">
       <img src="../static/images/info-logo.svg" alt="">
-      <p style="font-size: 15px;">Report an illegal dump nearby</p>
+      <p style="font-size: 13px;">Report an illegal</p> <p style="font-size: 13px;"> dump nearby</p>
     </div></a>
   </div>
   <div class="wrap-bin">
@@ -46,11 +46,11 @@
       </div></a>
       <a href="{% url 'purchase' %}"><div class="wrap-bin-button">
         <img src="../static/images/fi-rs-trash.svg" alt="">
-        <p>Bio-waste</p>
+        <p>Plastic</p>
       </div></a>
       <a href="{% url 'purchase' %}"><div class="wrap-bin-button">
         <img src="../static/images/fi-rs-trash.svg" alt="">
-        <p>Bio-waste</p>
+        <p>Paper/Glass</p>
       </div></a>
     </div>
   </div>
