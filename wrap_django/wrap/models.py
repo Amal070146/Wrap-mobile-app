@@ -19,7 +19,7 @@ class User(models.Model):
 class Booking(models.Model):
     # user = models.OneToOneField(User, on_delete=models.CASCADE,default=0)
     book_id=  models.AutoField(primary_key=True)
-    email = models.EmailField(unique=True)
+    email = models.EmailField()
     uid = models.IntegerField()
     name = models.CharField(max_length=20,default='null')
     wastetype = models.CharField(max_length=20)
@@ -28,7 +28,7 @@ class Booking(models.Model):
     booking_address = models.CharField(max_length=100,default='null')
     
     def __str__(self):
-        return self.wastetype
+        return self.email
 
 class WrapUser(models.Model) :
     wrapid=models.AutoField(primary_key=True)

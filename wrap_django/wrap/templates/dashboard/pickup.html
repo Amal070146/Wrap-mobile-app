@@ -237,12 +237,13 @@ function app() {
         getDateValue(date) {
             let selectedDate = new Date(this.year, this.month, date);
             this.datepickerValue = selectedDate.toDateString();
-
             this.$refs.date.value = selectedDate.getFullYear() +"-"+ ('0'+ selectedDate.getMonth()).slice(-2) +"-"+ ('0' + selectedDate.getDate()).slice(-2);
 
-            var date1 = new Date();  
+            var date1 = new Date(selectedDate);  
+            var currentDate = new Date(date1);
+            currentDate.setMonth(currentDate.getMonth());
             date1 = this.$refs.date.value;  
-
+            console.log(currentDate)
             console.log(date1);
 
             this.showDatepicker = false;
