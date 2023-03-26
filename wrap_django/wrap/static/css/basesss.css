@@ -37,13 +37,19 @@ a > img {
 .navigation-bar {
   background: rgba(0, 151, 67, 0.9);
   height: 60px;
-  padding: 0px 60px;
-width: 200px;
+  padding: 0px 30px;
+  width: 300px;
   border-radius: 56px;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 20%;
+  gap: 20px;
+}
+
+.nav-images{
+  width: 30px;
+  height: 30px;
+
 }
 @media screen and (max-width: 350px) {
   .header-nav-bar > div > h1 {

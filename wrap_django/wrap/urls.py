@@ -1,7 +1,7 @@
 from .views import signup,admin_home,get_start,loader,login_admin,signin,user_logout,admin_logout
 from .views import track,booking,rewards,dashboard
 from .views import report,pickup,purchase,dropoff
-from .views import profile
+from .views import profile,notification
 from django import contrib
 from django.urls import include,path
 
@@ -26,5 +26,5 @@ urlpatterns = [
     path('report/',report,name='report'),
 
     path('profile/',profile,name='profile'),
-
+    path('notification/',notification,name='notification'),
 ]

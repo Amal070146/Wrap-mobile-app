@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse, HttpResponseRedirect
 import datetime
-from .models import User, Admin
+from .models import User, Admin,Booking,WrapUser
 from .forms import ProfileForm
 
 #loader and home\
@@ -108,9 +108,9 @@ def dashboard(request):
 def booking(request):
     if 'uname' in request.session:
         data = {'name':request.session.get('uname')}
-        # bookings = Booking.objects.all()
-        return render(request,'booking.html',context=data)
-        # return render(request,'booking.html',{'bookings': bookings},context=data)
+        bookings = Booking.objects.all()
+        # return render(request,'booking.html',context=data)
+        return render(request,'booking.html',{'bookings': bookings})
     else:
         data = {'status':'You need to login first'}
         return render(request,'signin.html',context=data)
@@ -143,6 +143,15 @@ def dropoff(request):
 def pickup(request):
     if 'uname' in request.session:
         data = {'name':request.session.get('uname')}
+        if request.method == 'POST':
+            users  = User.objects.get(name=request.session['uname'])
+            print(users.email)
+            wastetype = request.POST.get('wastetype')
+            date = request.POST.get('date')
+            booking_address = request.POST.get('booking_address')
+            print(date)
+            book = Booking(wastetype=wastetype,name=users.name,uid=users.uid ,date=date,email=users.email, booking_address=booking_address)
+            book.save()
         return render(request,'dashboard/pickup.html',context=data)
     else:
         data = {'status':'You need to login first'}
@@ -190,3 +199,12 @@ def profile(request):
          else:
             data = {'status':'You need to login first'}
             return render(request,'signin.html',context=data)
+
+
+#notification
+def notification(request):
+    if 'uname' in request.session:
+        return render(request,'notification.html')
+    else:
+        data = {'status':'You need to login first'}
+        return render(request,'signin.html',context=data)

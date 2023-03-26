@@ -1,8 +1,8 @@
 {% extends 'base.html' %} {% block style %}
-<link rel="stylesheet" href="../static/css/booking.css" />
+<link rel="stylesheet" href="../static/css/bookingss.css" />
 {% endblock %} {% block title %} Booking{% endblock %} {% block content %}
 <div class="booking">
-  <h2>Your Schedule</h2>
+  <h2 class="heading-bookings">Your Schedule</h2>
   <div class="your-schedule">
     <div class="your-schedule-left">
         <h4>TUE</h4>
@@ -14,7 +14,7 @@
     </div>
   </div>
   <div class="past-booking">
-    <h2>Past Bookings</h2>
+    <h2 class="heading-bookings">Past Bookings</h2>
     <table class="">
         <thead>
           <tr class="">
@@ -24,13 +24,13 @@
           </tr>
         </thead>
         <tbody class="">
-          <!-- {% for booking in bookings %}
+          {% for booking in bookings %}
           <tr class="border-b border-gray-200">
             <td class="py-2 pl-6 text-blue-500">{{booking.wastetype}}</td>
             <td class="py-2 text-center">{{booking.date}} </td>
             <td class="py-2 text-center">Order-In-Transit</td>
           </tr>
-		  {% endfor %} -->
+		  {% endfor %}
          <tr class="">
             <td class="">Plastic</td>
             <td class="">Today </td>

@@ -1,5 +1,19 @@
-{% extends 'base.html' %} 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css">
+	<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.js" defer></script>
+</head>
+<body>
+<!--
+  {% extends 'base.html' %} 
 {% block style %}
+-->  
 <style>
     form{
         overflow: scroll;
@@ -7,15 +21,14 @@
         height: 600px;
     }
 </style>
-  <link rel="stylesheet" href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css">
-	<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.js" defer></script>
+<!--
 {% endblock %}
 {% block title %} Schedule{% endblock %}
 {% block content %}
-<div >
-    <form action="{% url 'pickup' %}" method="POST">
-        {% csrf_token %}
-			<div class="flex justify-center items-center flex-col gap-2">
+-->
+    <!--<form action="{% url 'pickup' %}" method="POST">
+        {% csrf_token %}-->
+        <div class="flex justify-center items-center flex-col gap-2">
           <div class="flex flex-col gap-4 justify-center items-center">
             <div class="flex flex-col gap-4 justify-center items-center">
               <h1 class="font-semibold text-xl text-left">1.Select the type of waste</h1>
@@ -25,7 +38,7 @@
                     <input type="radio" id="Paper or clipboard" name="wastetype" value="Paper or clipboard" class="hidden peer" required>
                     <label for="Paper or clipboard" class="inline-flex items-center justify-between bg-[#f7931a] border-[3px] border-white rounded-xl cursor-pointer peer-checked:border-blue-600">                           
                       <div class="w-24 h-20 flex flex-col items-center justify-center rounded-xl shadow-sm gap-2 ">
-                        <img class="" src="../../static/images/Schedule-logos-1.svg" alt="img1"/>
+                        <img class="" src="../logo-images/Schedule-logos-1.svg" alt="img1"/>
                         <h1 class="text-white leading-none text-sm text-center">Paper or clipboard</h1>
                       </div>
                     </label>
@@ -34,7 +47,7 @@
                     <input type="radio" id="Bio waste" name="wastetype" value="Bio waste" class="hidden peer">
                     <label for="Bio waste" class="inline-flex items-center justify-between bg-[#34a853] border-[3px] border-white  rounded-xl cursor-pointer peer-checked:border-blue-600">
                       <div class="w-24 h-20 flex items-center flex-col justify-center rounded-xl shadow-sm gap-2 p-4">
-                        <img src="../../static/images/Schedule-logos-2.svg" class=""/>
+                        <img src="../logo-images/Schedule-logos-2.svg" class=""/>
                         <h1 class="text-white leading-none text-sm text-center">Bio-waste</h1>
                       </div>
                     </label>
@@ -43,7 +56,7 @@
                     <input type="radio" id="Plastic waste" name="wastetype" value="Plastic waste" class="hidden peer">
                     <label for="Plastic waste" class="inline-flex items-center justify-between bg-[#0096ff]  border-[3px] border-white  rounded-xl cursor-pointer peer-checked:border-blue-600">
                       <div class="w-24 h-20 flex flex-col items-center justify-center rounded-xl shadow-sm gap-2 p-4">
-                        <img src="../../static/images/Schedule-logos-3.svg" class=""/>
+                        <img src="../logo-images/Schedule-logos-3.svg" class=""/>
                         <h1 class="text-white leading-none text-sm text-center">Plastic waste</h1>
                       </div>
                     </label>
@@ -52,7 +65,7 @@
                     <input type="radio" id="Glass waste" name="wastetype" value="Glass waste" class="hidden peer">
                     <label for="Glass waste" class="inline-flex items-center justify-between bg-[#eb4335] border-[3px] border-white  rounded-xl cursor-pointer peer-checked:border-blue-600">
                       <div class="w-24 h-20 flex flex-col items-center justify-center rounded-xl shadow-sm gap-2 p-4">
-                        <img src="../../static/images/Schedule-logos-4.svg" class=""/>
+                        <img src="../logo-images/Schedule-logos-4.svg" class=""/>
                         <h1 class="text-white leading-none text-sm text-center">Glass waste</h1>
                       </div>
                     </label>
@@ -61,7 +74,7 @@
                     <input type="radio" id="e-waste" name="wastetype" value="e-waste" class="hidden peer">
                     <label for="e-waste" class="inline-flex items-center justify-between bg-[#bd00ff] border-[3px] border-white  rounded-xl cursor-pointer peer-checked:border-blue-600">
                       <div class="w-24 h-20 flex flex-col items-center justify-center rounded-xl shadow-sm gap-2 p-4">
-                        <img src="../../static/images/Schedule-logos-5.svg" class=""/>
+                        <img src="../logo-images/Schedule-logos-5.svg" class=""/>
                         <h1 class="text-white leading-none text-sm text-center">e-waste</h1>
                       </div>
                     </label>
@@ -70,7 +83,7 @@
                     <input type="radio" id="Others" name="wastetype" value="Others" class="hidden peer">
                     <label for="Others" class="inline-flex items-center justify-between bg-[#838383] border-[3px] border-white  rounded-xl cursor-pointer peer-checked:border-blue-600">
                       <div class="w-24 h-20 flex flex-col items-center justify-center rounded-xl shadow-sm gap-2 p-4">
-                        <img src="../../static/images/Schedule-logos-6.svg" class=""/>
+                        <img src="../logo-images/Schedule-logos-6.svg" class=""/>
                         <h1 class="text-white leading-none text-sm text-center">Others</h1>
                       </div>
                     </label>
@@ -177,7 +190,7 @@
           <div class="flex gap-4">
           <ul class="w-full md:grid-cols-2 flex items-center justify-center flex-wrap">
             <li>
-              <input type="radio" id="home address" name="booking_address" value="home address" class="hidden peer" required>
+              <input type="radio" id="home address" name="addresstype" value="home address" class="hidden peer" required>
               <label for="home address" class="inline-flex items-center justify-between bg-white border-[3px] border-white rounded-3xl cursor-pointer peer-checked:border-blue-600">                           
                 <div class="h-40 bg-white rounded-3xl shadow-lg p-4 mx-2">
                   <h1 class="w-full font-medium text-[#009743] text-lg p-2" >Home Address</h1>
@@ -191,20 +204,17 @@
               </label>
             </li>	
             <div class="h-40 bg-white rounded-3xl shadow-lg flex flex-col gap-4 items-center justify-center">
-              <img src="../../static/images/logo-add-address.svg">
+              <img src="../logo-images/logo-add-address.svg">
               <h1 class="text-sm px-4 ">Add another address</h1>
             </div>
           </div>
           <a class="mt-0 mx-2" href="#ScheduleSuccess">
-            <!-- <button class="px-8 py-4 bg-[#009743] text-white rounded-xl">Schedule Pickup</button> -->
-            <input class="px-8 py-4 bg-[#009743] text-white rounded-xl" type="submit" value="Schedule Pickup" name="submit">
+            <button class="px-8 py-4 bg-[#009743] text-white rounded-xl">Schedule Pickup</button>
           </a>
-        </div>				
-    </form>
-</div>
-{% endblock %}
+        </div>
+<!--{% endblock %}
 
-{% block script %}
+{% block script %}-->
 <script>
 const MONTH_NAMES = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 const DAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
@@ -269,4 +279,7 @@ function app() {
     }
 }
 </script>
-{% endblock %}
+
+<!--{% endblock %}-->
+</body>
+</html>
