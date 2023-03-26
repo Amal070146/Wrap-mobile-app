@@ -15,7 +15,7 @@
         <h1 style="font-size :26px;font-weight: 600;">{% block title %} {% endblock %}</h1>
       </div>
       <div style="right: 5%; position: fixed;display: flex;gap:12px;">
-        <a href=""><img src="../static/images/notification.svg" alt="" /></a>
+        <a href="{% url 'notification' %}"><img src="../static/images/notification.svg" alt="" /></a>
         <a href="{% url 'profile' %}"
           ><img src="../static/images/profile icon.svg" alt=""
         /></a>
