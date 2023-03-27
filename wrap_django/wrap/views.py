@@ -109,9 +109,17 @@ def dashboard(request):
 def booking(request):
     if 'uname' in request.session:
         data = {'name':request.session.get('uname')}
+        name = request.session.get('uname')
+        email = request.session.get('email')
         bookings = Booking.objects.all()
-        # return render(request,'booking.html',context=data)
-        return render(request,'booking.html',{'bookings': bookings})
+        print(email,name)
+        users  = User.objects.get(name=request.session['uname'])
+        bookings = Booking.objects.all() # Get all Booking objects from the database
+        booking_data = []
+        for booking in bookings:
+            if booking.email == users.email:
+                booking_data.append({'name': booking.name, 'email': booking.email, 'uid': booking.uid,'wastetype':booking.wastetype,'date':booking.date,'booking_status':booking.booking_status})
+        return render(request,'booking.html',{'bookings': booking_data})
     else:
         data = {'status':'You need to login first'}
         return render(request,'signin.html',context=data)
@@ -186,7 +194,7 @@ def dropoff(request):
             date = request.POST.get('date')
             booking_address = request.POST.get('booking_address')
             print(date)
-            book = Booking(wastetype=wastetype,name=users.name,uid=users.uid ,date=date,email=users.email, booking_address=booking_address)
+            book = Booking(wastetype=wastetype,name=users.name,uid=users.uid ,date=date,email=users.email, booking_address=booking_address,booking_status="In-Transit")
             book.save()
             return render(request,'dashboard/success/pickup-success.html',context=data)
         return render(request,'dashboard/dropoff.html',context=data)
@@ -204,7 +212,7 @@ def pickup(request):
             date = request.POST.get('date')
             booking_address = request.POST.get('booking_address')
             print(date)
-            book = Booking(wastetype=wastetype,name=users.name,uid=users.uid ,date=date,email=users.email, booking_address=booking_address)
+            book = Booking(wastetype=wastetype,name=users.name,uid=users.uid ,date=date,email=users.email, booking_address=booking_address,booking_status="In-Transit")
             book.save()
             return render(request,'dashboard/success/pickup-success.html',context=data)
         return render(request,'dashboard/pickup.html',context=data)

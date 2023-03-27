@@ -26,6 +26,7 @@ class Booking(models.Model):
     date = models.DateField(settings.DATE_FORMAT)
     typeaddress = models.CharField(max_length=100)
     booking_address = models.CharField(max_length=100,default='null')
+    booking_status = models.CharField(max_length=20)
     
     def __str__(self):
         return self.email
