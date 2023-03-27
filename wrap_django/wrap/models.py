@@ -8,7 +8,7 @@ class User(models.Model):
     uid = models.AutoField(primary_key=True)
     name = models.CharField(max_length=20,unique=True)
     email = models.EmailField(unique=True)
-    photo = models.ImageField(upload_to='profile_photos/',default='profile_photos/profile_user.png')
+    # photo = models.ImageField(upload_to='profile_photos/',default='profile_photos/profile_user.png')
     password = models.CharField(max_length=20)
     address = models.CharField(max_length=50,default='null')
     coins = models.IntegerField(default=0)
@@ -27,7 +27,7 @@ class Booking(models.Model):
     typeaddress = models.CharField(max_length=100)
     booking_address = models.CharField(max_length=100,default='null')
     booking_status = models.CharField(max_length=20)
-    
+
     def __str__(self):
         return self.email
 

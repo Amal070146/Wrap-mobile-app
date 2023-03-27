@@ -1,4 +1,4 @@
-from .views import signup,admin_home,get_start,loader,login_admin,signin,user_logout,admin_logout
+from .views import signup,admin_home,get_start,select_occupation,loader,login_admin,signin,user_logout,admin_logout
 from .views import track,booking,rewards,dashboard
 from .views import report,pickup,purchase,dropoff
 from .views import profile,notification
@@ -8,6 +8,7 @@ from django.urls import include,path
 urlpatterns = [
     path('',loader, name='loader'),
     path('get_start/',get_start,name='get_start'),
+    path('select_occupation/',select_occupation,name='select_occupation'),
     path('signup/',signup, name='signup'),
     path('signin/',signin, name='signin'),
     path('login_admin/',login_admin, name='login_admin'),

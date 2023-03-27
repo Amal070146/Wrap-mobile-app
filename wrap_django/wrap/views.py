@@ -10,6 +10,10 @@ def loader(request):
     return render(request,'loader.html')
 def get_start(request):
     return render(request,'get_start.html')
+def select_occupation(request):
+    return render(request,'select_occupation.html')
+
+
 # Admin pages
 
 def admin_home(request):
@@ -54,12 +58,13 @@ def signup(request):
     if request.method == 'POST':
         name = request.POST.get('uname')
         email = request.POST.get('email')
-        photo = request.FILES.get('photo')
+        # photo = request.FILES.get('photo')
         password = request.POST.get('password')
         re_password = request.POST.get('repassword')
 
         if(password == re_password):
-            user = User(name=name,email=email,photo=photo,password=password)
+            # user = User(name=name,email=email,photo=photo,password=password)
+            user = User(name=name,email=email,password=password)
             user.save()
             email = [email]
             request.session['uname'] = name
@@ -101,7 +106,7 @@ def user_logout(request):
 def dashboard(request):
     if 'uname' in request.session:
         data = {'name':request.session.get('uname')}
-        return render(request,'dashboard.html',context=data)
+        return render(request,'users/dashboard.html',context=data)
     else:
         data = {'status':'You need to login first'}
         return render(request,'sigin.html',context=data)
@@ -119,7 +124,7 @@ def booking(request):
         for booking in bookings:
             if booking.email == users.email:
                 booking_data.append({'name': booking.name, 'email': booking.email, 'uid': booking.uid,'wastetype':booking.wastetype,'date':booking.date,'booking_status':booking.booking_status})
-        return render(request,'booking.html',{'bookings': booking_data})
+        return render(request,'users/booking.html',{'bookings': booking_data})
     else:
         data = {'status':'You need to login first'}
         return render(request,'signin.html',context=data)
@@ -127,7 +132,7 @@ def booking(request):
 def rewards(request):
     if 'uname' in request.session:
         data = {'name':request.session.get('uname')}
-        return render(request,'rewards.html',context=data)
+        return render(request,'users/rewards.html',context=data)
     else:
         data = {'status':'You need to login first'}
         return render(request,'signin.html',context=data)
@@ -178,7 +183,7 @@ def track(request):
         ]
         folium.PolyLine(trail_coordinates, tooltip="Coast",color="darkred").add_to(m)
         m = m._repr_html_()
-        return render(request,'track.html',{ "m": m})
+        return render(request,'users/track.html',{ "m": m})
     else:
         data = {'status':'You need to login first'}
         return render(request,'signin.html',context=data)
@@ -197,7 +202,7 @@ def dropoff(request):
             book = Booking(wastetype=wastetype,name=users.name,uid=users.uid ,date=date,email=users.email, booking_address=booking_address,booking_status="In-Transit")
             book.save()
             return render(request,'dashboard/success/pickup-success.html',context=data)
-        return render(request,'dashboard/dropoff.html',context=data)
+        return render(request,'users/dashboard/dropoff.html',context=data)
     else:
         data = {'status':'You need to login first'}
         return render(request,'signin.html',context=data)
@@ -214,8 +219,8 @@ def pickup(request):
             print(date)
             book = Booking(wastetype=wastetype,name=users.name,uid=users.uid ,date=date,email=users.email, booking_address=booking_address,booking_status="In-Transit")
             book.save()
-            return render(request,'dashboard/success/pickup-success.html',context=data)
-        return render(request,'dashboard/pickup.html',context=data)
+            return render(request,'users/dashboard/success/pickup-success.html',context=data)
+        return render(request,'users/dashboard/pickup.html',context=data)
     else:
         data = {'status':'You need to login first'}
         return render(request,'signin.html',context=data)
@@ -223,7 +228,7 @@ def pickup(request):
 def purchase(request):
     if 'uname' in request.session:
         data = {'name':request.session.get('uname')}
-        return render(request,'dashboard/purchase.html',context=data)
+        return render(request,'users/dashboard/purchase.html',context=data)
     else:
         data = {'status':'You need to login first'}
         return render(request,'signin.html',context=data)
@@ -231,7 +236,7 @@ def purchase(request):
 def report(request):
     if 'uname' in request.session:
         data = {'name':request.session.get('uname')}
-        return render(request,'dashboard/report.html',context=data)
+        return render(request,'users/dashboard/report.html',context=data)
     else:
         data = {'status':'You need to login first'}
         return render(request,'signin.html',context=data)
@@ -241,12 +246,13 @@ def profile(request):
         user= User()
         user.name = request.POST.get('uname')
         user.email = request.POST.get('email')
-        user.photo = request.FILES.get('photo')
+        # user.photo = request.FILES.get('photo')
         
         data = {'name':request.session.get('uname')}
-        if user.photo:
-            user.photo = request.FILES.get('photo')
-        user = User(name=name,email=email,photo=user.photo)
+        # if user.photo:
+        #     user.photo = request.FILES.get('photo')
+        # user = User(name=name,email=email,photo=user.photo)
+        user = User(name=name,email=email)
         user.save()
         return redirect('profile')
     else:
@@ -258,7 +264,7 @@ def profile(request):
                 'name': name,
                 'email':email
             }
-            return render(request,'profile.html',my_dict)
+            return render(request,'users/profile.html',my_dict)
          else:
             data = {'status':'You need to login first'}
             return render(request,'signin.html',context=data)
@@ -267,7 +273,7 @@ def profile(request):
 #notification
 def notification(request):
     if 'uname' in request.session:
-        return render(request,'notification.html')
+        return render(request,'users/notification.html')
     else:
         data = {'status':'You need to login first'}
         return render(request,'signin.html',context=data)
