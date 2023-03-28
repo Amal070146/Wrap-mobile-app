@@ -1,19 +1,36 @@
-{% extends 'base.html' %} 
-{% block style %} {% endblock %}
-{% block title %} Profile{% endblock %}
-{% block content %}
-<div>
-<h1>Profile Settings</h1>
-<form method="post" enctype="multipart/form-data">
+{% extends 'base.html' %} {% block style %}
+<link rel="stylesheet" href="../../static/css/prof.css" />
+{% endblock %} {% block title %} Profile{% endblock %} {% block content %}
+<div class="profile-wrapper">
+  <!-- <h1>Profile Settings</h1> -->
+  <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
-    <label for="id_username">Username:{{name}}</label>
-    <input type="text" name="uname" id="id_username" ><br>
-    <label for="id_email">Email:{{ email }}</label>
-    <input type="email" name="email" id="id_email" value="">
-    <button type="submit">Save</button>
-</form>
-<div class="my-block">
-            <a href="{% url 'user_logout' %}"><button class="button" ><span>LOGOUT</span></button></a>
-     </div>
+    <div class="details-wrapper">
+      <div class="username">
+        <h1>{{name}}</h1>
+        <p>({{occupation}})</p>
+      </div>
+
+      <p>{{ email }}</p>
+    </div>
+    <div class="coins-wrapper">
+        <img src="../../static/images/WRAPCOIN-green.svg" alt="">
+        <h1>{{coins}}</h1>
+    </div>
+  </form>
+  <div class="my-block">
+    <a href="{% url 'user_logout' %}"
+      ><div class="profile-button-div">
+        <div class="profile-button-left">
+            <img src="../../static/images/logout.svg" alt="">
+            <h1>LOGOUT</h1>
+        </div>
+        <div>
+            <img src="../../static/images/right-arrow-red.svg" alt="">
+        </div>
+      </div>
+      </a
+    >
+  </div>
 </div>
 {% endblock %}

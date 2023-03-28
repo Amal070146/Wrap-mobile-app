@@ -19,14 +19,15 @@ h3 {
 .your-schedule {
   height: fit-content;
   display: flex;
+  flex-direction: column;
   background: #fcfcfc;
-  box-shadow: -2px 4px 16px rgba(0, 0, 0, 0.1);
+  /* box-shadow: -2px 4px 16px rgba(0, 0, 0, 0.1);
   border-radius: 22px;
-  padding: 20px 20px;
-  justify-content: left;
-  width: 70%;
-  gap: 25px;
-  min-width: 250px;
+  padding: 20px 20px; */
+  /* justify-content: left; */
+  /* width: 70%; */
+  gap: 5px;
+  min-width: 270px;
 }
 
 .your-schedule-left {

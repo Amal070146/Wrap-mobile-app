@@ -127,7 +127,7 @@ def dashboard(request):
     else:
         data = {'status':'You need to login first'}
         return render(request,'sigin.html',context=data)
-    
+month=["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"]   
 def booking(request):
     if 'uname' in request.session:
         data = {'name':request.session.get('uname')}
@@ -138,9 +138,12 @@ def booking(request):
         users  = User.objects.get(name=request.session['uname'])
         bookings = Booking.objects.all() # Get all Booking objects from the database
         booking_data = []
+        count=0
         for booking in bookings:
             if booking.email == users.email:
-                booking_data.append({'name': booking.name, 'email': booking.email, 'uid': booking.uid,'wastetype':booking.wastetype,'date':booking.date,'booking_status':booking.booking_status})
+                if booking.booking_status == 'Booked' and count==0:
+                    count=1
+                booking_data.append({'name': booking.name, 'email': booking.email, 'uid': booking.uid,'wastetype':booking.wastetype,'date':str(booking.date),'date1':str(booking.date)[8:10],'month':month[int(str(booking.date)[5:7])-1],'booking_status':booking.booking_status,'count':count})
         return render(request,'users/booking.html',{'bookings': booking_data})
     else:
         data = {'status':'You need to login first'}
@@ -234,7 +237,7 @@ def pickup(request):
             date = request.POST.get('date')
             booking_address = request.POST.get('booking_address')
             print(date)
-            book = Booking(wastetype=wastetype,name=users.name,uid=users.uid ,date=date,email=users.email, booking_address=booking_address,booking_status="In-Transit")
+            book = Booking(wastetype=wastetype,name=users.name,uid=users.uid ,date=date,email=users.email, booking_address=booking_address,booking_status="Booked")
             book.save()
             return render(request,'users/dashboard/success/pickup-success.html',context=data)
         return render(request,'users/dashboard/pickup.html',context=data)
@@ -264,22 +267,26 @@ def profile(request):
         user.name = request.POST.get('uname')
         user.email = request.POST.get('email')
         # user.photo = request.FILES.get('photo')
-        
+        users  = User.objects.get(name=request.session['uname'])
         data = {'name':request.session.get('uname')}
         # if user.photo:
         #     user.photo = request.FILES.get('photo')
         # user = User(name=name,email=email,photo=user.photo)
-        user = User(name=name,email=email)
+        # user = User(name=name,email=email)
         user.save()
         return redirect('profile')
     else:
          if 'uname' in request.session:
-            name = request.session.get('uname')
-            email = request.session.get('email')
+            # name = request.session.get('uname')
+            # email = request.session.get('email')
+            users  = User.objects.get(name=request.session['uname'])
+
             # password = {'name':request.session.get('password')}
             my_dict = {
-                'name': name,
-                'email':email
+                'name': users.name,
+                'email':users.email,
+                'occupation':users.occupation,
+                'coins':users.coins
             }
             return render(request,'users/profile.html',my_dict)
          else:
