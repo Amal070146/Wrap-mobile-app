@@ -14,79 +14,81 @@
       <p>{{ email }}</p>
     </div>
     <div class="coins-wrapper">
-        <img src="../../static/images/WRAPCOIN-green.svg" alt="">
-        <h1>{{coins}}</h1>
+      <img src="../../static/images/WRAPCOIN-green.svg" alt="" />
+      <h1>{{coins}}</h1>
     </div>
   </form>
   <div class="my-block">
+    <a href="{% url 'edit_profile' %}"
+      ><div class="profile-button-div">
+        <div class="profile-button-left">
+          <img
+            src="../../static/images/profile-page/edit-profile-logo.svg"
+            alt=""
+          />
+          <h1>Edit Profile</h1>
+        </div>
+        <div>
+          <img
+            src="../../static/images/profile-page/right-arrow-grey.svg"
+            alt=""
+          />
+        </div>
+      </div> </a
+    ><a href="{% url 'contact_us' %}"
+      ><div class="profile-button-div">
+        <div class="profile-button-left">
+          <img src="../../static/images/profile-page/contact-logo.svg" alt="" />
+          <h1>Contact Us</h1>
+        </div>
+        <div>
+          <img
+            src="../../static/images/profile-page/right-arrow-grey.svg"
+            alt=""
+          />
+        </div>
+      </div> </a
+    ><a href="{% url 'support_profile' %}"
+      ><div class="profile-button-div">
+        <div class="profile-button-left">
+          <img src="../../static/images/profile-page/support-logo.svg" alt="" />
+          <h1>Support</h1>
+        </div>
+        <div>
+          <img
+            src="../../static/images/profile-page/right-arrow-grey.svg"
+            alt=""
+          />
+        </div>
+      </div> </a
+    ><a href="{% url 'delete_user' %}"
+      ><div class="profile-button-div">
+        <div class="profile-button-left">
+          <img src="../../static/images/profile-page/delete-logo.svg" alt="" />
+          <h1>Delete Account</h1>
+        </div>
+        <div>
+          <img
+            src="../../static/images/profile-page/right-arrow-grey.svg"
+            alt=""
+          />
+        </div>
+      </div>
+    </a>
     <a href="{% url 'user_logout' %}"
       ><div class="profile-button-div">
         <div class="profile-button-left">
-            <img src="../../static/images/profile-page/edit-profile-logo.svg" alt="">
-            <h1>Edit Profile</h1>
+          <img src="../../static/images/profile-page/logout.svg" alt="" />
+          <h1 style="color: red">LogOut</h1>
         </div>
         <div>
-            <img src="../../static/images/profile-page/right-arrow-grey.svg" alt="">
+          <img
+            src="../../static/images/profile-page/right-arrow-red.svg"
+            alt=""
+          />
         </div>
       </div>
-      </a
-    ><a href="{% url 'user_logout' %}"
-      ><div class="profile-button-div">
-        <div class="profile-button-left">
-            <img src="../../static/images/profile-page/change-password-logo.svg" alt="">
-            <h1>Change Password</h1>
-        </div>
-        <div>
-            <img src="../../static/images/profile-page/right-arrow-grey.svg" alt="">
-        </div>
-      </div>
-      </a
-    ><a href="{% url 'user_logout' %}"
-      ><div class="profile-button-div">
-        <div class="profile-button-left">
-            <img src="../../static/images/profile-page/contact-logo.svg" alt="">
-            <h1>Contact Us</h1>
-        </div>
-        <div>
-            <img src="../../static/images/profile-page/right-arrow-grey.svg" alt="">
-        </div>
-      </div>
-      </a
-    ><a href="{% url 'user_logout' %}"
-      ><div class="profile-button-div">
-        <div class="profile-button-left">
-            <img src="../../static/images/profile-page/support-logo.svg" alt="">
-            <h1>Support</h1>
-        </div>
-        <div>
-            <img src="../../static/images/profile-page/right-arrow-grey.svg" alt="">
-        </div>
-      </div>
-      </a
-    ><a href="{% url 'user_logout' %}"
-      ><div class="profile-button-div">
-        <div class="profile-button-left">
-            <img src="../../static/images/profile-page/delete-logo.svg" alt="">
-            <h1>Delete Account</h1>
-        </div>
-        <div>
-            <img src="../../static/images/profile-page/right-arrow-grey.svg" alt="">
-        </div>
-      </div>
-      </a
-    >
-    <a href="{% url 'user_logout' %}"
-      ><div class="profile-button-div">
-        <div class="profile-button-left">
-            <img src="../../static/images/profile-page/logout.svg" alt="">
-            <h1 style="color:red">LogOut</h1>
-        </div>
-        <div>
-            <img src="../../static/images/profile-page/right-arrow-red.svg" alt="">
-        </div>
-      </div>
-      </a
-    >
+    </a>
   </div>
 </div>
 {% endblock %}

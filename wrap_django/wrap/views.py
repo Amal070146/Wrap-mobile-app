@@ -301,3 +301,63 @@ def notification(request):
     else:
         data = {'status':'You need to login first'}
         return render(request,'signin.html',context=data)
+
+
+#user-profile pages   
+def edit_profile(request):
+    if 'uname' in request.session:
+        users  = User.objects.get(name=request.session['uname'])
+        my_dict = {
+                'name': users.name,
+                'email':users.email,
+                'password':users.password,
+                'coins':users.coins
+            }
+        if request.method == 'POST':
+            users  = User.objects.get(name=request.session['uname'])
+            print(users.name)
+            name = request.POST.get('new_name')
+            email = request.POST.get('new_email')
+            old_password = request.POST.get('old_password')
+            new_password = request.POST.get('new_password')
+            new1_password = request.POST.get('new1_password')
+            print(name,email)
+            if old_password == users.password and new1_password==new_password and new_password != '':
+                # us = User(name=name,email=email,password=new_password)
+                # us.save()
+                users.name=name
+                users.email=email
+                users.password=new1_password
+                uname=name
+                users.save()
+            elif old_password == users.password :
+                us = User(name=name,email=email)
+                uname=name
+                us.save()
+            # return redirect('profile',uname)
+            return redirect('signin')
+
+        return render(request,'users/profile/edit-profile.html',my_dict)
+    else:
+        data = {'status':'You need to login first'}
+        return render(request,'signin.html',context=data)
+    
+def support_profile(request):
+    if 'uname' in request.session:
+        return render(request,'users/profile/support-profile.html')
+    else:
+        data = {'status':'You need to login first'}
+        return render(request,'signin.html',context=data)
+    
+def contact_us(request):
+    if 'uname' in request.session:
+        return render(request,'users/profile/contact-us.html')
+    else:
+        data = {'status':'You need to login first'}
+        return render(request,'signin.html',context=data)
+def delete_user(request):
+    if 'uname' in request.session:
+        return render(request,'users/profile/delete-user.html')
+    else:
+        data = {'status':'You need to login first'}
+        return render(request,'signin.html',context=data)
