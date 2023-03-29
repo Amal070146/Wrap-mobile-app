@@ -1,0 +1,79 @@
+{% extends 'base.html' %} {% block style %}
+<style>
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .trending-wrapper {
+    height: 320px;
+    width: 90vw;
+  }
+  .trending-wrapper > div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .trending-wrapper > div > h1,
+  .ongoing-offer-wrapper > h1 {
+    font-weight: 500;
+    font-size: 25px;
+    color: #009743;
+  }
+  .coins-wrapper {
+    display: flex;
+    color: #009743;
+    border: 3px solid #009743;
+    width: fit-content;
+    padding: 5px 15px;
+    gap: 5px;
+    border-radius: 8px;
+    background-color: #eaf6ed;
+    font-size: 20px;
+    font-weight: 600;
+  }
+  .ongoing-offer-wrapper {
+    height: 200px;
+    width: 90vw;
+  }
+  .trending-cards {
+    background: #ffffff;
+    box-shadow: -2px 4px 16px rgba(0, 0, 0, 0.25);
+    border-radius: 7.98783px;
+    width: 164px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+  }
+</style>
+
+{% endblock %} {% block title %} Redeem{% endblock %} {% block content %}
+<form action="{% url 'redeem' %}" method="post">
+  {% csrf_token %}
+  <div class="trending-wrapper">
+    <div>
+      <h1>Trending Now</h1>
+      <div class="coins-wrapper">
+        <img src="../../static/images/WRAPCOIN-green.svg" alt="" />
+        <h1>2500</h1>
+      </div>
+    </div>
+    <div>
+      <div class="trending-cards">
+        <img src="../../static/images/amazon.svg" alt="" />
+        <p>Amazon.in Rs. 50 Gift Card</p>
+        <div style="display: flex;color: #009743;">
+          <img src="../../static/images/WRAPCOIN-green.svg" alt="" />
+          <h1>500</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ongoing-offer-wrapper">
+    <h1>Ongoing Offers</h1>
+    <div></div>
+  </div>
+</form>
+{% endblock %}

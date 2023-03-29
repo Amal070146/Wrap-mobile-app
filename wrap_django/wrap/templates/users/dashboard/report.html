@@ -1,25 +1,133 @@
-{% extends 'base.html' %} 
-{% block style %} 
-<link rel="stylesheet" href="../../../static/css/dashboard-pages.css">
-{% endblock %}
-{% block title %} Report{% endblock %}
-{% block content %}
-<div class="report">
-    <div class="report-upload">
-        <div class="report-upload-text">
-            <h3>Upload your images</h3>
-            <p>Please upload a clear picture of the dump.</p><p>(PNG, JPG images are preferred)</p>
+{% extends 'base.html' %} {% block style %}
+<link rel="stylesheet" href="../../../static/css/dashboard-pages.css" />
+<style>
+  .alert {
+    text-align: center;
+  }
 
-        </div>
-        <div class="report-upload-image">
-            <img src="../../../static/images/upload-logo.svg" alt="">
-            <p>Drag and drop or browse to choose a file</p>
-        </div>
+  #preview {
+    max-height: 256px;
+    height: auto;
+    width: auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 5px;
+  }
+  #img_container {
+    border-radius: 5px;
+    margin-top: 20px;
+    width: auto;
+  }
+  .input-group {
+    margin-left: calc(calc(100vw - 100%) / 2);
+    margin-top: 40px;
+    width: 320px;
+  }
+  .imgInp {
+    width: 150px;
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #d3d3d3;
+  }
+  .loading {
+    animation: blinkingText ease 2.5s infinite;
+  }
+  @keyframes blinkingText {
+    0% {
+      color: #000;
+    }
+    50% {
+      color: transparent;
+    }
+    99% {
+      color: transparent;
+    }
+    100% {
+      color: #000;
+    }
+  }
+  .custom-file-label {
+    cursor: pointer;
+  }
+</style>
+{% endblock %} {% block title %} Report{% endblock %} {% block content %}
+<!-- <form action="{% url 'pickup' %}" method="POST">
+  {% csrf_token %}
+  <div class="report">
+    <div class="report-upload">
+      <div class="report-upload-text">
+        <h3>Upload your images</h3>
+        <p>Please upload a clear picture of the dump.</p>
+        <p>(PNG, JPG images are preferred)</p>
+      </div>
+      <div class="report-upload-image">
+        <img src="../../../static/images/upload-logo.svg" alt="" />
+        <p>Drag and drop or browse to choose a file</p>
+      </div>
     </div>
     <div class="report-location">
-        <p>Enter the location of the dump</p>
-        <input type="text" name="" id="" placeholder="HMT Nagar, Kalamassery Kochi">
+      <p>Enter the location of the dump</p>
+      <input
+        type="text"
+        name=""
+        id=""
+        placeholder="HMT Nagar, Kalamassery Kochi"
+      />
     </div>
-    <input class="report-button" type="submit" value="REPORT" name="submit">
-</div>
+    <input class="report-button" type="submit" value="REPORT" name="submit" />
+  </div>
+</form> -->
+
+<div class="flex flex-col items-center justify-center gap-4">
+    <div
+      class="flex flex-col items-center justify-center bg-white rounded-3xl shadow-lg px-4 py-4 gap-2 w-[100%]"
+    >
+      <h1 class="text-[#009743] text-xl font-semibold">Upload your images</h1>
+      <p class="text-gray-500 text-sm">
+        Please upload a clear picture of the dump.
+      </p>
+      <p class="text-gray-500 text-sm">(Only PNG, JPG images are supported)</p>
+      <div class="Neon Neon-theme-dragdropbox">
+        <input
+          style="
+            z-index: 999;
+            opacity: 0;
+          "
+          name="files[]"
+          id="filer_input2"
+          multiple="multiple"
+          type="file"
+        />
+        <div class="Neon-input-dragDrop bg-gray-100 h-[250px] flex flex-col items-center justify-center shadow-3xl">
+          <div class="Neon-input-inner flex flex-col items-center justify-center px-20">
+            <div class="Neon-input-icon">
+              <i class="fa fa-file-image-o"></i>
+            </div>
+            <a class="Neon-input-choose-btn"
+              ><img src="../../../static/images/upload-logo.svg" alt=""
+            /></a>
+            <div class="Neon-input-text flex flex-col items-center">
+              <h3>Drag and drop or</h3> <h3> browse to choose a file</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="flex flex-col justify-center items-center bg-white h-36 gap-4 rounded-3xl shadow-lg "
+    >
+      <h1 class="text-black text-xl font-semibold">
+        Enter the location of the dump
+      </h1>
+      <input class=" w-[90%] h-12 bg-[#ececec] rounded-xl" type="text" placeholder=" HMT Nagar, Kalamassery Kochi"/>
+    </div>
+    <a
+      href="/reportsuccess"
+      type="submit"
+      class="px-6 py-3 bg-[#009743] text-white rounded-lg"
+    >
+      REPORT
+    </a>
+  </div>
 {% endblock %}

@@ -36,6 +36,14 @@ class WrapUser(models.Model) :
     wrapid=models.AutoField(primary_key=True)
     coins = models.IntegerField(default=0)
 
+class PurchaseBin(models.Model) :
+    pid = models.AutoField(primary_key=True)
+    email = models.EmailField()
+    uid = models.IntegerField()
+    name = models.CharField(max_length=20,default='null')
+    amount = models.IntegerField()
+    address = models.CharField(max_length=50,default='null')
+
 
 class Admin(models.Model):
     aid = models.AutoField(primary_key=True)

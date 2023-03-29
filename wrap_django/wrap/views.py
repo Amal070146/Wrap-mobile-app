@@ -140,7 +140,7 @@ def booking(request):
         booking_data = []
         count=0
         for booking in bookings:
-            if booking.email == users.email:
+            if booking.uid == users.uid:
                 if booking.booking_status == 'Booked' and count==0:
                     count=1
                 booking_data.append({'name': booking.name, 'email': booking.email, 'uid': booking.uid,'wastetype':booking.wastetype,'date':str(booking.date),'date1':str(booking.date)[8:10],'month':month[int(str(booking.date)[5:7])-1],'booking_status':booking.booking_status,'count':count})
@@ -153,6 +153,14 @@ def rewards(request):
     if 'uname' in request.session:
         data = {'name':request.session.get('uname')}
         return render(request,'users/rewards.html',context=data)
+    else:
+        data = {'status':'You need to login first'}
+        return render(request,'signin.html',context=data)
+
+def redeem(request):
+    if 'uname' in request.session:
+        data = {'name':request.session.get('uname')}
+        return render(request,'users/redeem.html',context=data)
     else:
         data = {'status':'You need to login first'}
         return render(request,'signin.html',context=data)
@@ -260,7 +268,7 @@ def report(request):
     else:
         data = {'status':'You need to login first'}
         return render(request,'signin.html',context=data)
-    
+
 def profile(request):
     if request.method == 'POST':
         user= User()

@@ -1,5 +1,5 @@
 from .views import signup,admin_home,get_start,select_occupation,loader,login_admin,signin,user_logout,admin_logout
-from .views import track,booking,rewards,dashboard
+from .views import track,booking,rewards,dashboard,redeem
 from .views import report,pickup,purchase,dropoff
 from .views import profile,notification,edit_profile,delete_user,support_profile,contact_us
 from django import contrib
@@ -20,6 +20,7 @@ urlpatterns = [
     path("booking/",booking,name='booking'),
     path('rewards/',rewards,name='rewards'),
     path('track/',track,name='track'),
+    path('redeem/',redeem,name='redeem'),
     
     path('dropoff/',dropoff,name='dropoff'),
     path('pickup/',pickup,name='pickup'),
