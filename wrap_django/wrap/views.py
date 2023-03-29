@@ -1,9 +1,11 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse, HttpResponseRedirect
 import datetime
-from .models import User, Admin,Booking,WrapUser
+from .models import User, Admin,Booking,WrapUser,Redeem,PurchaseBin
 from .forms import ProfileForm
 import folium
+from django.conf import settings
+import os
 
 #loader and home\
 def loader(request):
@@ -160,7 +162,21 @@ def rewards(request):
 def redeem(request):
     if 'uname' in request.session:
         data = {'name':request.session.get('uname')}
-        return render(request,'users/redeem.html',context=data)
+        users  = User.objects.get(name=request.session['uname'])
+        redeem = Redeem.objects.all()
+        redeem_data = []
+        for red in redeem:
+            print(red.amount,red.description)
+            # image_path = os.path.join(settings.BASE_DIR, red.photo)
+            # with open(image_path, 'rb') as f:
+            #     image_data = f.read()
+            # redeem_data.append({'photo':image_data,'description':red.description,'amount':red.amount,'order_type':red.order_type})
+            redeem_data.append({'photo':red.photo,'description':red.description,'amount':red.amount,'order_type':red.order_type})
+            print(red.photo)
+        my_dict = {
+                'coins':users.coins
+            }
+        return render(request,'users/redeem.html',{'my_dict':my_dict,'redeem':redeem_data})
     else:
         data = {'status':'You need to login first'}
         return render(request,'signin.html',context=data)

@@ -43,6 +43,20 @@ class PurchaseBin(models.Model) :
     name = models.CharField(max_length=20,default='null')
     amount = models.IntegerField()
     address = models.CharField(max_length=50,default='null')
+    returnsbin =  models.CharField(max_length=50,default='null')
+
+class Redeem(models.Model) :
+    rid = models.AutoField(primary_key=True)
+    photo = models.ImageField(upload_to='redeem_photos/')
+    description = models.CharField(max_length=100)
+    CHOICE_ONE = 'trending'
+    CHOICE_TWO = 'ongoing'
+    MY_CHOICES = [
+        (CHOICE_ONE, 'trending'),
+        (CHOICE_TWO, 'ongoing'),
+    ]
+    order_type = models.CharField(max_length=10, choices=MY_CHOICES)
+    amount = models.IntegerField()
 
 
 class Admin(models.Model):
