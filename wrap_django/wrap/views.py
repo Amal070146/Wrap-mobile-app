@@ -245,7 +245,7 @@ def dropoff(request):
             print(date)
             book = Booking(wastetype=wastetype,name=users.name,uid=users.uid ,date=date,email=users.email, booking_address=booking_address,booking_status="In-Transit")
             book.save()
-            return render(request,'dashboard/success/pickup-success.html',context=data)
+            return render(request,'dashboard/success/dropoff-success.html',context=data)
         return render(request,'users/dashboard/dropoff.html',context=data)
     else:
         data = {'status':'You need to login first'}
@@ -272,6 +272,8 @@ def pickup(request):
 def purchase(request):
     if 'uname' in request.session:
         data = {'name':request.session.get('uname')}
+        if request.method == 'POST':
+            return render(request,'users/dashboard/success/purchase-success.html',context=data)
         return render(request,'users/dashboard/purchase.html',context=data)
     else:
         data = {'status':'You need to login first'}
@@ -280,6 +282,8 @@ def purchase(request):
 def report(request):
     if 'uname' in request.session:
         data = {'name':request.session.get('uname')}
+        if request.method == 'POST':
+            return render(request,'users/dashboard/success/report-success.html',context=data)
         return render(request,'users/dashboard/report.html',context=data)
     else:
         data = {'status':'You need to login first'}

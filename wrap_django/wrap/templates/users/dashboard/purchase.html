@@ -2,7 +2,7 @@
 {% block style %} {% endblock %}
 {% block title %} Purchase{% endblock %}
 {% block content %}
-<form class="overflow-y-auto h-[40rem]">
+<form action="{% url 'purchase' %}" method="post" class="overflow-y-auto h-[40rem]">
      {% csrf_token %}
  <div class="flex gap-3 px-4 mt-[-16px]">
         <div class="w-full">
@@ -92,7 +92,7 @@
     </div>
     <div class="flex justify-center items-center w-full p-4">	
         <a href="#OrderbinSuccess">
-            <button class="w-48 h-12 rounded-lg bg-[#009743] text-white">Place Order</button>
+            <input type="submit" name="submit" class="w-48 h-12 rounded-lg bg-[#009743] text-white" value="Place Order"/>
         </a>
     </div>
 </form>
