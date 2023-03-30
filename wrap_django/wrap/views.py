@@ -1,11 +1,12 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse, HttpResponseRedirect
 import datetime
-from .models import User, Admin,Booking,WrapUser,Redeem,PurchaseBin
+from .models import User, Admin,Booking,AddressUser,Redeem,PurchaseBin,ReportIssue
 from .forms import ProfileForm
 import folium
 from django.conf import settings
 import os
+import geocoder
 
 #loader and home\
 def loader(request):
@@ -385,7 +386,29 @@ def contact_us(request):
         return render(request,'signin.html',context=data)
 def delete_user(request):
     if 'uname' in request.session:
+        if request.method == 'POST':
+            user = User.objects.get(name=request.session['uname'])
+            book = Booking.objects.all()
+            print(book)
+            for booking in book:
+                if booking.uid == user.uid and booking.wastetype=='Bio waste':
+                    print(booking)
+                    debook=booking.delete()
+                    print(debook)
+            # user.delete()
         return render(request,'users/profile/delete-user.html')
+    else:
+        data = {'status':'You need to login first'}
+        return render(request,'signin.html',context=data)
+    
+def add_address(request):
+    if 'uname' in request.session:
+        if request.method == 'POST':
+            g = geocoder.ip('me')
+            latitude = g.lat
+            longitude = g.lng
+            print(longitude,latitude)
+        return render(request,'users/profile/add-address.html')
     else:
         data = {'status':'You need to login first'}
         return render(request,'signin.html',context=data)

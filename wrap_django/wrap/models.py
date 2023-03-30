@@ -25,16 +25,14 @@ class Booking(models.Model):
     name = models.CharField(max_length=20,default='null')
     wastetype = models.CharField(max_length=20)
     date = models.DateField(settings.DATE_FORMAT)
-    typeaddress = models.CharField(max_length=100)
+    booking_address_title = models.CharField(max_length=20,default='null')
     booking_address = models.CharField(max_length=100,default='null')
     booking_status = models.CharField(max_length=20)
+    booking_latitude = models.FloatField(default='0.0')
+    booking_longitude = models.FloatField(default='0.0')
 
     def __str__(self):
         return self.email
-
-class WrapUser(models.Model) :
-    wrapid=models.AutoField(primary_key=True)
-    coins = models.IntegerField(default=0)
 
 class PurchaseBin(models.Model) :
     pid = models.AutoField(primary_key=True)
@@ -57,6 +55,22 @@ class Redeem(models.Model) :
     ]
     order_type = models.CharField(max_length=10, choices=MY_CHOICES)
     amount = models.IntegerField()
+
+class AddressUser(models.Model) :
+    email = models.EmailField()
+    uid = models.IntegerField()
+    name = models.CharField(max_length=20,default='null')
+    address_title = models.CharField(max_length=20,default='null')
+    address_content = models.CharField(max_length=50,default='null')
+    latitude = models.FloatField(default='0.0')
+    longitude = models.FloatField(default='0.0')
+
+class ReportIssue(models.Model) :
+    email = models.EmailField()
+    uid = models.IntegerField()
+    name = models.CharField(max_length=20,default='null')
+    photo = models.ImageField(upload_to='report_photos/')
+    address_report = models.CharField(max_length=50,default='null')
 
 
 class Admin(models.Model):

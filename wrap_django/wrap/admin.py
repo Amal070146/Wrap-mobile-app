@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import User, Admin,Booking,WrapUser,PurchaseBin,Redeem
+from .models import User, Admin,Booking,PurchaseBin,Redeem,AddressUser,ReportIssue
 
 
 
@@ -7,6 +7,8 @@ from .models import User, Admin,Booking,WrapUser,PurchaseBin,Redeem
 admin.site.register(User)
 admin.site.register(PurchaseBin)
 admin.site.register(Redeem)
-admin.site.register(WrapUser)
 admin.site.register(Booking)
+admin.site.register(AddressUser)
 admin.site.register(Admin)
+admin.site.register(ReportIssue)
+

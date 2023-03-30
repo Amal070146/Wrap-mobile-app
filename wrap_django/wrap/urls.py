@@ -1,7 +1,7 @@
 from .views import signup,admin_home,get_start,select_occupation,loader,login_admin,signin,user_logout,admin_logout
 from .views import track,booking,rewards,dashboard,redeem
 from .views import report,pickup,purchase,dropoff
-from .views import profile,notification,edit_profile,delete_user,support_profile,contact_us
+from .views import profile,notification,edit_profile,delete_user,support_profile,contact_us,add_address
 from django import contrib
 from django.urls import include,path
 
@@ -33,4 +33,5 @@ urlpatterns = [
     path('support_profile/',support_profile,name='support_profile'),
     path('delete_user/',delete_user,name='delete_user'),
     path('contact_us/',contact_us,name='contact_us'),
+    path('add_address/',add_address,name='add_address'),
 ]
