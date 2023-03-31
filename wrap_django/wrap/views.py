@@ -69,7 +69,6 @@ def signup(request):
         password = request.POST.get('password')
         re_password = request.POST.get('repassword')
 
-
         if(password == re_password):
             print(occupation)
             # user = User(name=name,email=email,photo=photo,password=password)
@@ -388,14 +387,11 @@ def delete_user(request):
     if 'uname' in request.session:
         if request.method == 'POST':
             user = User.objects.get(name=request.session['uname'])
-            book = Booking.objects.all()
-            print(book)
-            for booking in book:
-                if booking.uid == user.uid and booking.wastetype=='Bio waste':
-                    print(booking)
-                    debook=booking.delete()
-                    print(debook)
-            # user.delete()
+            books = Booking.objects.filter(uid=user.uid)
+            print(books)
+            books.delete()
+            user.delete()
+            return redirect('signin')
         return render(request,'users/profile/delete-user.html')
     else:
         data = {'status':'You need to login first'}
