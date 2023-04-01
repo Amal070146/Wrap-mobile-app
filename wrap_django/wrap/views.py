@@ -81,7 +81,7 @@ def signup(request):
             if occupation=='User':
                 return dashboard(request)
             elif occupation=='Employee':
-                return render(request, 'employee/profile.html')
+                return render(request, 'employee/dashboard.html')
             elif occupation == 'Company':
                 return render(request, 'managers/profile.html')
             data = {'status':"Password and Re-entered password must be same"}
@@ -104,7 +104,7 @@ def signin(request):
             if occupation=='User':
                 return dashboard(request)
             elif occupation=='Employee':
-                return render(request, 'employee/profile.html')
+                return render(request, 'employee/dashboard.html')
             elif occupation == 'Company':
                 return render(request, 'managers/profile.html')
         else:
@@ -316,7 +316,7 @@ def profile(request):
                 'occupation':users.occupation,
                 'coins':users.coins
             }
-            return render(request,'users/profile.html',my_dict)
+            return render(request,'users/profile.html',{'my_dict':my_dict,'occupation':users.occupation})
          else:
             data = {'status':'You need to login first'}
             return render(request,'signin.html',context=data)
@@ -408,3 +408,28 @@ def add_address(request):
     else:
         data = {'status':'You need to login first'}
         return render(request,'signin.html',context=data)
+
+#Employee pages
+def dashboard_employee(request):
+    if 'uname' in request.session:
+        data = {'name':request.session.get('uname')}
+        return render(request,'employee/dashboard.html',context=data)
+    else:
+        data = {'status':'You need to login first'}
+        return render(request,'sigin.html',context=data)
+    
+def pending_pickups(request):
+    if 'uname' in request.session:
+        data = {'name':request.session.get('uname')}
+        return render(request,'pending-pickups.html',context=data)
+    else:
+        data = {'status':'You need to login first'}
+        return render(request,'sigin.html',context=data)
+    
+def plastic_pickup(request):
+    if 'uname' in request.session:
+        data = {'name':request.session.get('uname')}
+        return render(request,'employee/plastic-pickup.html',context=data)
+    else:
+        data = {'status':'You need to login first'}
+        return render(request,'sigin.html',context=data)

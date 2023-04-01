@@ -1,0 +1,55 @@
+{% extends 'base-employee.html' %} {% block style %}
+<style>
+  .radio-button-wrapper-body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .radio-button-wrapper {
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+    align-items: center;
+  }
+  .radio-button {
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    padding: 8px;
+  }
+</style>{% block employeestyle %}{% endblock %}
+{% endblock %} {% block title %} Pending Pickups{% endblock %} {% block content %}
+<div class="radio-button-wrapper-body">
+  <div class="radio-button-wrapper">
+    <a href="{% url 'plastic_pickup' %}">
+      <div class="radio-button" style="background-color: rgb(3, 157, 106)">
+        <img src="../../static/images/Schedule-logos-1.svg" alt="" /></div
+    ></a>
+    <a href="">
+      <div class="radio-button" style="background-color: rgb(3, 157, 106)">
+        <img src="../../static/images/Schedule-logos-2.svg" alt="" /></div
+    ></a>
+    <a href="">
+      <div class="radio-button" style="background-color: rgb(3, 157, 106)">
+        <img src="../../static/images/Schedule-logos-3.svg" alt="" /></div
+    ></a>
+    <a href="">
+      <div class="radio-button" style="background-color: rgb(3, 157, 106)">
+        <img src="../../static/images/Schedule-logos-4.svg" alt="" /></div
+    ></a>
+    <a href="">
+      <div class="radio-button" style="background-color: rgb(3, 157, 106)">
+        <img src="../../static/images/Schedule-logos-5.svg" alt="" /></div
+    ></a>
+    <a href="">
+      <div class="radio-button" style="background-color: rgb(3, 157, 106)">
+        <img src="../../static/images/Schedule-logos-6.svg" alt="" /></div
+    ></a>
+  </div>
+</div>
+<div>
+    <h1>{% block employeetitle %}{% endblock %}</h1>
+    {% block employeecontent %} {% endblock %}
+</div>
+{% endblock %}

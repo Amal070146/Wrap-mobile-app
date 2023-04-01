@@ -7,16 +7,18 @@
     {% csrf_token %}
     <div class="details-wrapper">
       <div class="username">
-        <h1>{{name}}</h1>
-        <p>({{occupation}})</p>
+        <h1>{{my_dict.name}}</h1>
+        <p>({{my_dict.occupation}})</p>
       </div>
 
-      <p>{{ email }}</p>
+      <p>{{ my_dict.email }}</p>
     </div>
+    {% if occupation == "User" %}
     <div class="coins-wrapper">
       <img src="../../static/images/WRAPCOIN-green.svg" alt="" />
-      <h1>{{coins}}</h1>
+      <h1>{{my_dict.coins}}</h1>
     </div>
+    {% endif %}
   </form>
   <div class="my-block">
     <a href="{% url 'edit_profile' %}"
@@ -35,7 +37,9 @@
           />
         </div>
       </div> </a
-    ><a href="{% url 'add_address' %}"
+    >
+    {% if occupation == "User" %}
+    <a href="{% url 'add_address' %}"
       ><div class="profile-button-div">
         <div class="profile-button-left">
           <img
@@ -51,7 +55,9 @@
           />
         </div>
       </div> </a
-    ><a href="{% url 'contact_us' %}"
+    >
+    {% endif %}
+    <a href="{% url 'contact_us' %}"
       ><div class="profile-button-div">
         <div class="profile-button-left">
           <img src="../../static/images/profile-page/contact-logo.svg" alt="" />

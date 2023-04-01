@@ -2,6 +2,7 @@ from .views import signup,admin_home,get_start,select_occupation,loader,login_ad
 from .views import track,booking,rewards,dashboard,redeem
 from .views import report,pickup,purchase,dropoff
 from .views import profile,notification,edit_profile,delete_user,support_profile,contact_us,add_address
+from .views import dashboard_employee,pending_pickups,plastic_pickup
 from django import contrib
 from django.urls import include,path
 
@@ -34,4 +35,9 @@ urlpatterns = [
     path('delete_user/',delete_user,name='delete_user'),
     path('contact_us/',contact_us,name='contact_us'),
     path('add_address/',add_address,name='add_address'),
+
+    #Employee pages
+    path('dashboard_employee/',dashboard_employee,name='dashboard_employee'),
+    path('pending_pickups/',pending_pickups,name='pending_pickups'),
+    path('plastic_pickup/',plastic_pickup,name='plastic_pickup')
 ]

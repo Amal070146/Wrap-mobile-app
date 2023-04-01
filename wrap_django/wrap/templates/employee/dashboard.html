@@ -1,4 +1,4 @@
-{% extends 'base.html' %} 
+{% extends 'base-employee.html' %} 
 {% block style %} 
 <link rel="stylesheet" href="../../static/css/dashboard.css">
 {% endblock %}
@@ -8,16 +8,16 @@
   <div class="schedule-pickup pb-4">
     <div class="schedule-pickup-box">
       <div class="schedule-pickup-box-text">
-        <h2>Earn rewards for</h2><h2> Recycling</h2>
+        <h2>Together creating</h2><h2>cleaner tomorrow</h2>
         <p style="color:white">with you we will help ecology</p>
       </div>
       <div><img src="../../static/images/dashboard-pick.svg" alt=""></div>
 
     </div>
-    <div class="schedule-pickup-link"><a href="{% url 'pickup' %}">
+    <div class="schedule-pickup-link"><a href="{% url 'pending_pickups' %}">
       <div class="schedule-pickup-link-text">
-        <h3>Schedule a pickup</h3>
-        <p>Request for a pickup of segregated</p>
+        <h3>Manage Pickups</h3>
+        <p>See pickup locations nearby</p>
       </div>
       <div>
         <img src="../../static/images/logo-schedule-pickup.svg" alt="">
@@ -29,7 +29,7 @@
     <a href="{% url 'dropoff' %}">
     <div class="dropoff">
       <img class="nav-images" src="../../static/images/location-logo.svg" alt="">
-      <p style="font-size: 12px;text-align: center;">Drop off at a collection point</p>
+      <p style="font-size: 12px;text-align: center;">Register a complaint</p>
     </div></a>
     <a href="{% url 'report' %}">
     <div class="dropoff">
@@ -37,22 +37,6 @@
       <p style="font-size: 12px;text-align: center;">Report an illegal dump nearby</p>
     </div></a>
   </div>
-  <div class="wrap-bin">
-    <p>Purchase a WRAP bin</p>
-    <div class="wrap-bin-button-wrapper">
-      <a href="{% url 'purchase' %}"><div class="wrap-bin-button">
-        <img src="../../static/images/fi-rs-trash.svg" alt="">
-        <p>Bio-waste</p>
-      </div></a>
-      <a href="{% url 'purchase' %}"><div class="wrap-bin-button">
-        <img src="../../static/images/fi-rs-trash.svg" alt="">
-        <p>Plastic</p>
-      </div></a>
-      <a href="{% url 'purchase' %}"><div class="wrap-bin-button">
-        <img src="../../static/images/fi-rs-trash.svg" alt="">
-        <p>Paper/Glass</p>
-      </div></a>
-    </div>
-  </div>
+
 </div>
 {% endblock %}
