@@ -2,7 +2,8 @@ from .views import signup,admin_home,get_start,select_occupation,loader,login_ad
 from .views import track,booking,rewards,dashboard,redeem
 from .views import report,pickup,purchase,dropoff
 from .views import profile,notification,edit_profile,delete_user,support_profile,contact_us,add_address
-from .views import dashboard_employee,pending_pickups,plastic_pickup
+from .views import dashboard_employee,pending_pickups
+from .views import plastic_pickup,paper_pickup,biowaste_pickup,glass_pickup,ewaste_pickup,others_pickup
 from django import contrib
 from django.urls import include,path
 
@@ -39,5 +40,10 @@ urlpatterns = [
     #Employee pages
     path('dashboard_employee/',dashboard_employee,name='dashboard_employee'),
     path('pending_pickups/',pending_pickups,name='pending_pickups'),
-    path('plastic_pickup/',plastic_pickup,name='plastic_pickup')
+    path('plastic_pickup/',plastic_pickup,name='plastic_pickup'),
+    path('paper_pickup/',paper_pickup,name='paper_pickup'),
+    path('biowaste_pickup/',biowaste_pickup,name='biowaste_pickup'),
+    path('glass_pickup/',glass_pickup,name='glass_pickup'),
+    path('ewaste_pickup/',ewaste_pickup,name='ewaste_pickup'),
+    path('others_pickup/',others_pickup,name='others_pickup')
 ]

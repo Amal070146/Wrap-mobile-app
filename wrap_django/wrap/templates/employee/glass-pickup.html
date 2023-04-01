@@ -1,3 +1,11 @@
-{% extends 'pending-pickups.html' %} {% block employeestyle %} {% endblock %}
+{% extends 'employee/pending-pickups.html' %} {% block employeestyle %} {% endblock %}
  {% block employeetitle %}Glass{% endblock %}
-    {% block employeecontent %} {% endblock %}
+    {% block employeecontent %}
+    <div class="user-content-wrapper">
+    {% for book in booking %}
+  <div class="user-content">
+    <h1>{{book.name}}</h1>
+    <p>{{book.address}}</p>
+  </div>
+  {% endfor %}
+</div> {% endblock %}

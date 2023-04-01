@@ -421,7 +421,7 @@ def dashboard_employee(request):
 def pending_pickups(request):
     if 'uname' in request.session:
         data = {'name':request.session.get('uname')}
-        return render(request,'pending-pickups.html',context=data)
+        return render(request,'employee/pending-pickups.html',context=data)
     else:
         data = {'status':'You need to login first'}
         return render(request,'sigin.html',context=data)
@@ -429,7 +429,83 @@ def pending_pickups(request):
 def plastic_pickup(request):
     if 'uname' in request.session:
         data = {'name':request.session.get('uname')}
-        return render(request,'employee/plastic-pickup.html',context=data)
+        books = Booking.objects.all()
+        booking_data=[]
+        for book in books:
+            if book.wastetype=='Plastic waste':
+                print(book)
+                booking_data.append({'name': book.name, 'email': book.email, 'uid': book.uid,'wastetype':book.wastetype,'date':str(book.date),'date1':str(book.date)[8:10],'booking_status':book.booking_status,'address':book.booking_address})
+        return render(request,'employee/plastic-pickup.html',{'booking':booking_data})
+    else:
+        data = {'status':'You need to login first'}
+        return render(request,'sigin.html',context=data)
+    
+def biowaste_pickup(request):
+    if 'uname' in request.session:
+        data = {'name':request.session.get('uname')}
+        books = Booking.objects.all()
+        booking_data=[]
+        for book in books:
+            if book.wastetype=='Bio waste':
+                print(book)
+                booking_data.append({'name': book.name, 'email': book.email, 'uid': book.uid,'wastetype':book.wastetype,'date':str(book.date),'date1':str(book.date)[8:10],'booking_status':book.booking_status,'address':book.booking_address})
+        return render(request,'employee/biowaste-pickup.html',{'booking':booking_data})
+    else:
+        data = {'status':'You need to login first'}
+        return render(request,'sigin.html',context=data)
+    
+def paper_pickup(request):
+    if 'uname' in request.session:
+        data = {'name':request.session.get('uname')}
+        books = Booking.objects.all()
+        booking_data=[]
+        for book in books:
+            if book.wastetype=='Paper or clipboard':
+                print(book)
+                booking_data.append({'name': book.name, 'email': book.email, 'uid': book.uid,'wastetype':book.wastetype,'date':str(book.date),'date1':str(book.date)[8:10],'booking_status':book.booking_status,'address':book.booking_address})
+        return render(request,'employee/paper-pickup.html',{'booking':booking_data})
+    else:
+        data = {'status':'You need to login first'}
+        return render(request,'sigin.html',context=data)
+    
+def glass_pickup(request):
+    if 'uname' in request.session:
+        data = {'name':request.session.get('uname')}
+        books = Booking.objects.all()
+        booking_data=[]
+        for book in books:
+            if book.wastetype=='Glass waste':
+                print(book)
+                booking_data.append({'name': book.name, 'email': book.email, 'uid': book.uid,'wastetype':book.wastetype,'date':str(book.date),'date1':str(book.date)[8:10],'booking_status':book.booking_status,'address':book.booking_address})
+        return render(request,'employee/glass-pickup.html',{'booking':booking_data})
+    else:
+        data = {'status':'You need to login first'}
+        return render(request,'sigin.html',context=data)
+    
+def ewaste_pickup(request):
+    if 'uname' in request.session:
+        data = {'name':request.session.get('uname')}
+        books = Booking.objects.all()
+        booking_data=[]
+        for book in books:
+            if book.wastetype=='e-waste':
+                print(book)
+                booking_data.append({'name': book.name, 'email': book.email, 'uid': book.uid,'wastetype':book.wastetype,'date':str(book.date),'date1':str(book.date)[8:10],'booking_status':book.booking_status,'address':book.booking_address})
+        return render(request,'employee/ewaste-pickup.html',{'booking':booking_data})
+    else:
+        data = {'status':'You need to login first'}
+        return render(request,'sigin.html',context=data)
+    
+def others_pickup(request):
+    if 'uname' in request.session:
+        data = {'name':request.session.get('uname')}
+        books = Booking.objects.all()
+        booking_data=[]
+        for book in books:
+            if book.wastetype=='others':
+                print(book)
+                booking_data.append({'name': book.name, 'email': book.email, 'uid': book.uid,'wastetype':book.wastetype,'date':str(book.date),'date1':str(book.date)[8:10],'booking_status':book.booking_status,'address':book.booking_address})
+        return render(request,'employee/others-pickup.html',{'booking':booking_data})
     else:
         data = {'status':'You need to login first'}
         return render(request,'sigin.html',context=data)
