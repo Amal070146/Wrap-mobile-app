@@ -365,26 +365,39 @@ def edit_profile(request):
             # return redirect('profile',uname)
             return redirect('signin')
 
-        return render(request,'users/profile/edit-profile.html',my_dict)
+        user = User.objects.get(name=request.session['uname'])
+        if user.occupation == "User":
+            return render(request,'users/profile/edit-profile.html',my_dict)
+        elif user.occupation == "Employee":
+            return render(request,'employee/profile/edit-profile.html',my_dict)
     else:
         data = {'status':'You need to login first'}
         return render(request,'signin.html',context=data)
     
 def support_profile(request):
     if 'uname' in request.session:
-        return render(request,'users/profile/support-profile.html')
+        user = User.objects.get(name=request.session['uname'])
+        if user.occupation == "User":
+            return render(request,'users/profile/support-profile.html')
+        elif user.occupation == "Employee":
+            return render(request,'employee/profile/support-profile.html')
     else:
         data = {'status':'You need to login first'}
         return render(request,'signin.html',context=data)
     
 def contact_us(request):
     if 'uname' in request.session:
-        return render(request,'users/profile/contact-us.html')
+        user = User.objects.get(name=request.session['uname'])
+        if user.occupation == "User":
+            return render(request,'users/profile/contact-us.html')
+        elif user.occupation == "Employee":
+            return render(request,'employee/profile/contact-us.html')
     else:
         data = {'status':'You need to login first'}
         return render(request,'signin.html',context=data)
 def delete_user(request):
     if 'uname' in request.session:
+        user = User.objects.get(name=request.session['uname'])
         if request.method == 'POST':
             user = User.objects.get(name=request.session['uname'])
             books = Booking.objects.filter(uid=user.uid)
@@ -392,7 +405,11 @@ def delete_user(request):
             books.delete()
             user.delete()
             return redirect('signin')
-        return render(request,'users/profile/delete-user.html')
+        if user.occupation == "User":
+            return render(request,'users/profile/delete-user.html')
+        elif user.occupation == "Employee":
+            return render(request,'employee/profile/delete-user.html')
+
     else:
         data = {'status':'You need to login first'}
         return render(request,'signin.html',context=data)
@@ -509,3 +526,27 @@ def others_pickup(request):
     else:
         data = {'status':'You need to login first'}
         return render(request,'sigin.html',context=data)
+    
+def employee_profile(request):
+    if request.method == 'POST':
+        user= User()
+        user.name = request.POST.get('uname')
+        user.email = request.POST.get('email')
+        users  = User.objects.get(name=request.session['uname'])
+        data = {'name':request.session.get('uname')}
+        user.save()
+        return redirect('employee_profile')
+    else:
+         if 'uname' in request.session:
+            users  = User.objects.get(name=request.session['uname'])
+            my_dict = {
+                'name': users.name,
+                'email':users.email,
+                'occupation':users.occupation,
+                'coins':users.coins
+            }
+            return render(request,'employee/employee_profile.html',{'my_dict':my_dict,'occupation':users.occupation})
+         else:
+            data = {'status':'You need to login first'}
+            return render(request,'signin.html',context=data)
+
