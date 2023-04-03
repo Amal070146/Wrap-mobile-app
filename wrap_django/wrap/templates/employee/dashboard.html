@@ -5,7 +5,7 @@
 {% block title %} Dashboard{% endblock %}
 {% block content %}
 <div class="dashboard-wrapper">
-  <div class="schedule-pickup pb-4">
+  <div class="schedule-pickup pb-4 h-[250px]">
     <div class="schedule-pickup-box">
       <div class="schedule-pickup-box-text">
         <h2>Together creating</h2><h2>cleaner tomorrow</h2>
@@ -26,7 +26,7 @@
     </div>
   </div>
   <div class="drop-report-wrapper">
-    <a href="{% url 'dropoff' %}">
+    <a href="{% url 'complaint' %}">
     <div class="dropoff">
       <img class="nav-images" src="../../static/images/location-logo.svg" alt="">
       <p style="font-size: 12px;text-align: center;">Register a complaint</p>
@@ -37,6 +37,11 @@
       <p style="font-size: 12px;text-align: center;">Report an illegal dump nearby</p>
     </div></a>
   </div>
-
+  <a href="{% url 'routeway' %}">
+  <div style="background-image: url('../../static/images/employee-pages/routeway-view.svg');width: 357px;
+height: 264px;display: flex;place-items: center;justify-content: center;">
+    <p style="font-weight: 500;
+font-size: 21.1512px;">Routeway view</p>
+  </div></a>
 </div>
 {% endblock %}

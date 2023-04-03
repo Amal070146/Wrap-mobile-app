@@ -438,7 +438,7 @@ def dashboard_employee(request):
 def pending_pickups(request):
     if 'uname' in request.session:
         data = {'name':request.session.get('uname')}
-        return render(request,'employee/pending-pickups.html',context=data)
+        return redirect(paper_pickup)
     else:
         data = {'status':'You need to login first'}
         return render(request,'sigin.html',context=data)
@@ -451,7 +451,7 @@ def plastic_pickup(request):
         for book in books:
             if book.wastetype=='Plastic waste':
                 print(book)
-                booking_data.append({'name': book.name, 'email': book.email, 'uid': book.uid,'wastetype':book.wastetype,'date':str(book.date),'date1':str(book.date)[8:10],'booking_status':book.booking_status,'address':book.booking_address})
+                booking_data.append({'name': book.name, 'email': book.email, 'uid': book.uid,'wastetype':book.wastetype,'date':str(book.date),'date1':str(book.date)[8:10],'booking_status':book.booking_status,'address':book.booking_address,'book_id':book.book_id})
         return render(request,'employee/plastic-pickup.html',{'booking':booking_data})
     else:
         data = {'status':'You need to login first'}
@@ -462,10 +462,20 @@ def biowaste_pickup(request):
         data = {'name':request.session.get('uname')}
         books = Booking.objects.all()
         booking_data=[]
+        if request.method == 'POST':
+            wastetype = request.POST.get('wastetype')
+            book_id = request.POST.get('book_id')
+            kg = request.POST.get('kilo')
+            if kg != 'None':
+                print(book_id,wastetype,kg)
+                coins = int(kg)*50
+                print(coins)
+                print("hello")
+
         for book in books:
             if book.wastetype=='Bio waste':
                 print(book)
-                booking_data.append({'name': book.name, 'email': book.email, 'uid': book.uid,'wastetype':book.wastetype,'date':str(book.date),'date1':str(book.date)[8:10],'booking_status':book.booking_status,'address':book.booking_address})
+                booking_data.append({'name': book.name, 'email': book.email, 'uid': book.uid,'wastetype':book.wastetype,'date':str(book.date),'date1':str(book.date)[8:10],'booking_status':book.booking_status,'address':book.booking_address,'book_id':book.book_id})
         return render(request,'employee/biowaste-pickup.html',{'booking':booking_data})
     else:
         data = {'status':'You need to login first'}
@@ -479,7 +489,7 @@ def paper_pickup(request):
         for book in books:
             if book.wastetype=='Paper or clipboard':
                 print(book)
-                booking_data.append({'name': book.name, 'email': book.email, 'uid': book.uid,'wastetype':book.wastetype,'date':str(book.date),'date1':str(book.date)[8:10],'booking_status':book.booking_status,'address':book.booking_address})
+                booking_data.append({'name': book.name, 'email': book.email, 'uid': book.uid,'wastetype':book.wastetype,'date':str(book.date),'date1':str(book.date)[8:10],'booking_status':book.booking_status,'address':book.booking_address,'book_id':book.book_id})
         return render(request,'employee/paper-pickup.html',{'booking':booking_data})
     else:
         data = {'status':'You need to login first'}
@@ -493,7 +503,7 @@ def glass_pickup(request):
         for book in books:
             if book.wastetype=='Glass waste':
                 print(book)
-                booking_data.append({'name': book.name, 'email': book.email, 'uid': book.uid,'wastetype':book.wastetype,'date':str(book.date),'date1':str(book.date)[8:10],'booking_status':book.booking_status,'address':book.booking_address})
+                booking_data.append({'name': book.name, 'email': book.email, 'uid': book.uid,'wastetype':book.wastetype,'date':str(book.date),'date1':str(book.date)[8:10],'booking_status':book.booking_status,'address':book.booking_address,'book_id':book.book_id})
         return render(request,'employee/glass-pickup.html',{'booking':booking_data})
     else:
         data = {'status':'You need to login first'}
@@ -507,7 +517,7 @@ def ewaste_pickup(request):
         for book in books:
             if book.wastetype=='e-waste':
                 print(book)
-                booking_data.append({'name': book.name, 'email': book.email, 'uid': book.uid,'wastetype':book.wastetype,'date':str(book.date),'date1':str(book.date)[8:10],'booking_status':book.booking_status,'address':book.booking_address})
+                booking_data.append({'name': book.name, 'email': book.email, 'uid': book.uid,'wastetype':book.wastetype,'date':str(book.date),'date1':str(book.date)[8:10],'booking_status':book.booking_status,'address':book.booking_address,'book_id':book.book_id})
         return render(request,'employee/ewaste-pickup.html',{'booking':booking_data})
     else:
         data = {'status':'You need to login first'}
@@ -521,7 +531,7 @@ def others_pickup(request):
         for book in books:
             if book.wastetype=='others':
                 print(book)
-                booking_data.append({'name': book.name, 'email': book.email, 'uid': book.uid,'wastetype':book.wastetype,'date':str(book.date),'date1':str(book.date)[8:10],'booking_status':book.booking_status,'address':book.booking_address})
+                booking_data.append({'name': book.name, 'email': book.email, 'uid': book.uid,'wastetype':book.wastetype,'date':str(book.date),'date1':str(book.date)[8:10],'booking_status':book.booking_status,'address':book.booking_address,'book_id':book.book_id})
         return render(request,'employee/others-pickup.html',{'booking':booking_data})
     else:
         data = {'status':'You need to login first'}
@@ -550,3 +560,31 @@ def employee_profile(request):
             data = {'status':'You need to login first'}
             return render(request,'signin.html',context=data)
 
+def calculate_wrap_coins(wtype,kg):
+    if wtype == 'Bio waste':
+        coins = 50*kg
+    elif wtype == 'Plastic waste':
+        coins = 100*kg
+    elif wtype == 'Glass waste':
+        coins = 70*kg
+    elif wtype == 'Paper or clipboard':
+        coins = 150*kg
+    elif wtype == 'e-waste':
+        coins = 125*kg
+    elif wtype == 'others':
+        coins = 25*kg
+    return (coins)
+
+def routeway(request):
+    if 'uname' in request.session:
+        return render(request,'employee/routeway.html')
+    else:
+        data = {'status':'You need to login first'}
+        return render(request,'sigin.html',context=data)
+    
+def complaint(request):
+    if 'uname' in request.session:
+        return render(request,'employee/complaint.html')
+    else:
+        data = {'status':'You need to login first'}
+        return render(request,'sigin.html',context=data)
