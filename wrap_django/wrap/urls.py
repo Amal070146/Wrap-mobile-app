@@ -5,6 +5,7 @@ from .views import profile,notification,edit_profile,delete_user,support_profile
 from .views import dashboard_employee,pending_pickups,employee_profile
 from .views import plastic_pickup,paper_pickup,biowaste_pickup,glass_pickup,ewaste_pickup,others_pickup
 from .views import calculate_wrap_coins,routeway,complaint
+from .views import biowaste_routeway,ewaste_routeway,glass_routeway,paper_routeway,plastic_routeway,others_routeway
 from django import contrib
 from django.urls import include,path
 
@@ -49,6 +50,13 @@ urlpatterns = [
     path('others_pickup/',others_pickup,name='others_pickup'),
     path('employee_profile/',employee_profile,name='employee_profile'),
     path('calculate_wrap_coins/',calculate_wrap_coins,name='calculate_wrap_coins'),
+    
     path('routeway/',routeway,name='routeway'),
-    path('complaint/',complaint,name='complaint')
+    path('complaint/',complaint,name='complaint'),
+    path('biowaste_routeway/',biowaste_routeway,name='biowaste_routeway'),
+    path('ewaste_routeway/',ewaste_routeway,name='ewaste_routeway'),
+    path('glass_routeway/',glass_routeway,name='glass_routeway'),
+    path('others_routeway/',others_routeway,name='others_routeway'),
+    path('paper_routeway/',paper_routeway,name='paper_routeway'),
+    path('plastic_routeway/',plastic_routeway,name='plastic_routeway')
 ]

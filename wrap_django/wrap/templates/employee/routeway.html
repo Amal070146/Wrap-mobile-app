@@ -19,7 +19,7 @@
     flex-direction: column;
     align-items: start;
     justify-content: center;
-    padding: 0px 20px;
+    padding: 5px 20px;
     width: 358px;
     height: 84px;
     background: #d2edff;
@@ -29,6 +29,46 @@
   .booked-containers > h1 {
     font-weight: 600;
     font-size: 21.7801px;
+  }
+  .radio-button-wrapper-body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* overflow: scroll; */
+    width: 100vw;
+    overflow: auto;
+    padding: 0px 10px;
+  }
+
+  .radio-button-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* overflow: scroll; */
+    overflow-x: auto;
+    gap: 10px;
+  }
+  .radio-button {
+    border-radius: 23px;
+    width: fit-content;
+    min-width: 160px;
+    height: 43px;
+    padding: 9px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 5px 20px;
+    color: white;
+  }
+  .booking-content-wrapper{
+    margin-top: 5px;
+    display: flex;
+    flex-direction: column;
+    overflow: scroll;
+    overflow-x: hidden;
+    height: 14rem;
+    gap: 5px;
   }
 </style>
 <link
@@ -44,162 +84,52 @@
 ></script>
 {% endblock %} {% block title %}Routeway{% endblock %} {% block content %}
 <div class="routeway-wrapper">
-  <div style="width: 357px; height: 364px; border-radius: 20px" id="map"></div>
-  <div>
-    <div class="booked-containers">
-      <h1>Vaishnav MJ</h1>
-      <p>Street no. 1, HMT Nagar, Kochi</p>
+  <div class="radio-button-wrapper-body">
+    <div class="radio-button-wrapper">
+      <a href="{% url 'paper_routeway' %}">
+        <div class="radio-button" style="background-color: #f7931a">
+          <img src="../../static/images/Schedule-logos-1.svg" alt="" />
+          <p>Paper</p>
+        </div></a
+      >
+      <a href="{% url 'biowaste_routeway' %}">
+        <div class="radio-button" style="background-color: #009743">
+          <img src="../../static/images/Schedule-logos-2.svg" alt="" />
+          <p>Bio waste</p>
+        </div></a
+      >
+      <a href="{% url 'plastic_routeway' %}">
+        <div class="radio-button" style="background-color: #1877f2">
+          <img src="../../static/images/Schedule-logos-3.svg" alt="" />
+          <p>Plastic</p>
+        </div></a
+      >
+      <a href="{% url 'glass_routeway' %}">
+        <div class="radio-button" style="background-color: #eb4335">
+          <img src="../../static/images/Schedule-logos-4.svg" alt="" />
+          <p>Glass</p>
+        </div></a
+      >
+      <a href="{% url 'ewaste_routeway' %}">
+        <div class="radio-button" style="background-color: #bd00ff">
+          <img src="../../static/images/Schedule-logos-5.svg" alt="" />
+          <p>E-Waste</p>
+        </div></a
+      >
+      <a href="{% url 'others_routeway' %}">
+        <div class="radio-button" style="background-color: #8e8e8e">
+          <img src="../../static/images/Schedule-logos-6.svg" alt="" />
+          <p>Others</p>
+        </div></a
+      >
     </div>
   </div>
+  <h1 style="font-weight: 600; font-size: 21.7801px">
+    {% block titleroute %}plastic{% endblock %}
+  </h1>
+  <div style="width: 357px; height: 364px; border-radius: 20px" id="map"></div>
+  <div class="booking-content-wrapper">
+  {% block routewaycontent %} {% endblock %}
+  </div>
 </div>
-{% endblock %} {% block script %}
-
-<script>
-  var latlng = [
-    {
-      country: "Albania",
-      alpha2: "AL",
-      alpha3: "ALB",
-      num: 8,
-      lat: 10.371594187526886,
-      lng: 76.30393146547652,
-      img: `https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg`,
-    },
-    {
-      country: "Algeria",
-      alpha2: "DZ",
-      alpha3: "DZA",
-      num: 12,
-      lat: 10.370878597493242,
-      lng: 76.30415595989462,
-      img: `https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg`,
-    },
-    {
-      country: "American Samoa",
-      alpha2: "AS",
-      alpha3: "ASM",
-      num: 16,
-      lat: 10.373497817477768,
-      lng: 76.30593153666516,
-      img: `https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg`,
-    },
-    {
-      country: "Andorra",
-      alpha2: "AD",
-      alpha3: "AND",
-      num: 20,
-      lat: 42.5,
-      lng: 1.6,
-      img: `https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg`,
-    },
-    {
-      country: "Angola",
-      alpha2: "AO",
-      alpha3: "AGO",
-      num: 24,
-      lat: -12.5,
-      lng: 18.5,
-      img: `https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg`,
-    },
-    {
-      country: "Anguilla",
-      alpha2: "AI",
-      alpha3: "AIA",
-      num: 660,
-      lat: 18.25,
-      lng: -63.1667,
-      img: `https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg`,
-    },
-    {
-      country: "Antarctica",
-      alpha2: "AQ",
-      alpha3: "ATA",
-      num: 10,
-      lat: -90,
-      lng: 0,
-      img: `https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg`,
-    },
-    {
-      country: "Antigua and Barbuda",
-      alpha2: "AG",
-      alpha3: "ATG",
-      num: 28,
-      lat: 17.05,
-      lng: -61.8,
-      img: `https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg`,
-    },
-    {
-      country: "Argentina",
-      alpha2: "AR",
-      alpha3: "ARG",
-      num: 32,
-      lat: -34,
-      lng: -64,
-      img: `https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg`,
-    },
-    {
-      country: "Armenia",
-      alpha2: "AM",
-      alpha3: "ARM",
-      num: 51,
-      lat: 40,
-      lng: 45,
-      img: `https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg`,
-    },
-    {
-      country: "Aruba",
-      alpha2: "AW",
-      alpha3: "ABW",
-      num: 533,
-      lat: 12.5,
-      lng: -69.9667,
-      img: `https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg`,
-    },
-    {
-      country: "Australia",
-      alpha2: "AU",
-      alpha3: "AUS",
-      num: 36,
-      lat: -27,
-      lng: 133,
-      img: `https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg`,
-    },
-  ];
-  const popupHtml = (image) => {
-    return `
-      <div style="display:flex;flex-direction:column">
-        <span>Hello world!</span>
-        <span>I am a popup.</span>
-        <img src="${latlng[i].img}">
-      </div>
-      `;
-  };
-  var map = L.map("map").setView([10.373497817477768, 76.30593153666516], 15);
-  L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
-    maxZoom: 19,
-    attribution:
-      '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-  }).addTo(map);
-  for (var i = 0; i < latlng.length; i++) {
-    var marker = L.marker([latlng[i].lat, latlng[i].lng]).addTo(map);
-    marker.bindPopup(popupHtml(latlng[i].img));
-  }
-  const options = {
-    enableHighAccuracy: true,
-    timeout: 5000,
-    maximumAge: 0,
-  };
-
-  function success(pos) {
-    const crd = pos.coords;
-    var marker = L.marker([crd.latitude, crd.longitude]).addTo(map);
-  }
-
-  function error(err) {
-    console.warn(`ERROR(${err.code}): ${err.message}`);
-  }
-  window.addEventListener("load", (event) => {
-    navigator.geolocation.getCurrentPosition(success, error, options);
-  });
-</script>
-{% endblock %}
+{% endblock %} {% block script %} {% block routewayscript %} {% endblock %} {% endblock %}

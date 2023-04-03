@@ -469,6 +469,7 @@ def biowaste_pickup(request):
             if kg != 'None':
                 print(book_id,wastetype,kg)
                 coins = int(kg)*50
+                # coin = calculate_wrap_coins(wtype,kg)
                 print(coins)
                 print("hello")
 
@@ -577,7 +578,7 @@ def calculate_wrap_coins(wtype,kg):
 
 def routeway(request):
     if 'uname' in request.session:
-        return render(request,'employee/routeway.html')
+        return render(request,'employee/routeway-pages/paper-routeway.html')
     else:
         data = {'status':'You need to login first'}
         return render(request,'sigin.html',context=data)
@@ -585,6 +586,48 @@ def routeway(request):
 def complaint(request):
     if 'uname' in request.session:
         return render(request,'employee/complaint.html')
+    else:
+        data = {'status':'You need to login first'}
+        return render(request,'sigin.html',context=data)
+
+def ewaste_routeway(request):
+    if 'uname' in request.session:
+        return render(request,'employee/routeway-pages/ewaste-routeway.html')
+    else:
+        data = {'status':'You need to login first'}
+        return render(request,'sigin.html',context=data)
+        
+def biowaste_routeway(request):
+    if 'uname' in request.session:
+        return render(request,'employee/routeway-pages/biowaste-routeway.html')
+    else:
+        data = {'status':'You need to login first'}
+        return render(request,'sigin.html',context=data)
+    
+def glass_routeway(request):
+    if 'uname' in request.session:
+        return render(request,'employee/routeway-pages/glass-routeway.html')
+    else:
+        data = {'status':'You need to login first'}
+        return render(request,'sigin.html',context=data)
+
+def others_routeway(request):
+    if 'uname' in request.session:
+        return render(request,'employee/routeway-pages/others-routeway.html')
+    else:
+        data = {'status':'You need to login first'}
+        return render(request,'sigin.html',context=data)
+    
+def paper_routeway(request):
+    if 'uname' in request.session:
+        return render(request,'employee/routeway-pages/paper-routeway.html')
+    else:
+        data = {'status':'You need to login first'}
+        return render(request,'sigin.html',context=data)
+    
+def plastic_routeway(request):
+    if 'uname' in request.session:
+        return render(request,'employee/routeway-pages/plastic-routeway.html')
     else:
         data = {'status':'You need to login first'}
         return render(request,'sigin.html',context=data)
