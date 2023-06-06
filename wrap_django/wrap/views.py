@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect
 from django.http import HttpResponse, HttpResponseRedirect
 import datetime
 from .models import User, Admin,Booking,AddressUser,Redeem,PurchaseBin,ReportIssue
-from .forms import ProfileForm
+
 import folium
 from django.conf import settings
 import os
@@ -145,12 +145,27 @@ def booking(request):
             if booking.uid == users.uid:
                 if booking.booking_status == 'Booked' and count==0:
                     count=1
-                booking_data.append({'name': booking.name, 'email': booking.email, 'uid': booking.uid,'wastetype':booking.wastetype,'date':str(booking.date),'date1':str(booking.date)[8:10],'month':month[int(str(booking.date)[5:7])-1],'booking_status':booking.booking_status,'count':count})
-        return render(request,'users/booking.html',{'bookings': booking_data})
+                booking_data.append({'book_id':booking.book_id,'name': booking.name, 'email': booking.email, 'uid': booking.uid,'wastetype':booking.wastetype,'date':str(booking.date),'date1':str(booking.date)[8:10],'month':month[int(str(booking.date)[5:7])-1],'booking_status':booking.booking_status})
+        return render(request,'users/booking.html',{'bookings': booking_data,'count':count})
     else:
         data = {'status':'You need to login first'}
         return render(request,'signin.html',context=data)
-    
+
+def delete_booking(request):
+    if 'uname' in request.session:
+        data = {'name':request.session.get('uname')}
+        if request.method == 'POST':
+            book_id = request.POST.get('book_id')
+            books = Booking.objects.filter(book_id=book_id)
+            print(books,book_id)
+            books.delete()
+            return redirect('booking')
+        return render(request,'users/booking.html')
+    else:
+        data = {'status':'You need to login first'}
+        return render(request,'signin.html',context=data)
+
+      
 def rewards(request):
     if 'uname' in request.session:
         data = {'name':request.session.get('uname')}
@@ -254,17 +269,22 @@ def dropoff(request):
 def pickup(request):
     if 'uname' in request.session:
         data = {'name':request.session.get('uname')}
+        users  = User.objects.get(name=request.session['uname'])
+        adr = AddressUser.objects.filter(uid=users.uid)
+
         if request.method == 'POST':
-            users  = User.objects.get(name=request.session['uname'])
             print(users.email)
             wastetype = request.POST.get('wastetype')
             date = request.POST.get('date')
+            booking_address_title = request.POST.get('booking_address_title')
             booking_address = request.POST.get('booking_address')
+            booking_latitude = request.POST.get('booking_latitude')
+            booking_longitude = request.POST.get('booking_longitude')
             print(date)
-            book = Booking(wastetype=wastetype,name=users.name,uid=users.uid ,date=date,email=users.email, booking_address=booking_address,booking_status="Booked")
+            book = Booking(wastetype=wastetype,name=users.name,uid=users.uid ,date=date,email=users.email, booking_address=booking_address,booking_status="Booked",booking_address_title=booking_address_title,booking_latitude=booking_latitude,booking_longitude=booking_longitude)
             book.save()
             return render(request,'users/dashboard/success/pickup-success.html',context=data)
-        return render(request,'users/dashboard/pickup.html',context=data)
+        return render(request,'users/dashboard/pickup.html',{"context":data,'adr':adr})
     else:
         data = {'status':'You need to login first'}
         return render(request,'signin.html',context=data)
@@ -416,12 +436,41 @@ def delete_user(request):
     
 def add_address(request):
     if 'uname' in request.session:
-        if request.method == 'POST':
+        latitude = 'null'
+        longitude = 'null'
+        user = User.objects.get(name=request.session['uname'])
+        adr = AddressUser.objects.filter(uid=user.uid)
+        if request.method == 'POST':  
+            longitude = request.POST.get('longitude')
+            latitude = request.POST.get('latitude')
+            address_title = request.POST.get('address_title')
+            address_content = request.POST.get('address_content')
             g = geocoder.ip('me')
             latitude = g.lat
             longitude = g.lng
-            print(longitude,latitude)
-        return render(request,'users/profile/add-address.html')
+            print(longitude,latitude,address_content,address_title)
+            print(adr)
+            adrs = AddressUser(uid=user.uid,email=user.email,name=user.name,address_title=address_title,address_content=address_content,latitude=latitude,longitude=longitude)
+            print(adrs)
+            adrs.save()
+            # return render(request,'users/profile/add-address.html',{'lat':latitude,'log':longitude})
+            return redirect('add_address')
+        return render(request,'users/profile/add-address.html',{'lat':latitude,'log':longitude,'adr':adr})
+    else:
+        data = {'status':'You need to login first'}
+        return render(request,'signin.html',context=data)
+def delete_address(request):
+    if 'uname' in request.session:
+        user = User.objects.get(name=request.session['uname'])
+        if request.method == 'POST':  
+            address_title = request.POST.get('address_title')
+            address_content = request.POST.get('address_content')
+            aid = request.POST.get('aid')
+            adr = AddressUser.objects.filter(aid=aid)
+            print(adr)
+            adr.delete()
+            return redirect('add_address')
+        return render(request,'users/profile/add-address.html',{'adr':adr})
     else:
         data = {'status':'You need to login first'}
         return render(request,'signin.html',context=data)
@@ -628,6 +677,13 @@ def paper_routeway(request):
 def plastic_routeway(request):
     if 'uname' in request.session:
         return render(request,'employee/routeway-pages/plastic-routeway.html')
+    else:
+        data = {'status':'You need to login first'}
+        return render(request,'sigin.html',context=data)
+    
+def tensorflow_scan(request):
+    if 'uname' in request.session:
+        return render(request,'users/scan.html')
     else:
         data = {'status':'You need to login first'}
         return render(request,'sigin.html',context=data)
